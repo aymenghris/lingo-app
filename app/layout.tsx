@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import { ClerkProvider } from "@clerk/nextjs"
 import { Nunito } from "next/font/google"
 import type { FC, ReactNode } from "react"
 
@@ -16,9 +17,11 @@ interface RootLayoutProps {
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
 	return (
-		<html lang="en" className={nunito.className}>
-			<body>{children}</body>
-		</html>
+		<ClerkProvider>
+			<html lang="en" className={nunito.className}>
+				<body>{children}</body>
+			</html>
+		</ClerkProvider>
 	)
 }
 
