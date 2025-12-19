@@ -21,7 +21,7 @@ const HomePage = () => {
 					Learn, practice, and master new languages with Lingo.
 				</h1>
 
-				<div className="flex flex-col gap-y-2">
+				<div className="flex max-w-82 flex-col gap-y-3">
 					<div className="min-h-4">
 						<ClerkLoadingState />
 					</div>
