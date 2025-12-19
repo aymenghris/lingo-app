@@ -20,7 +20,7 @@
 		],
 		"paths": {
 			"@/*": ["./*"],
-			"@marketing/*": ["./app/(marketing)/*"]
+			"@home/*": ["./app/(home)/*"]
 		}
 	},
 	"include": [
