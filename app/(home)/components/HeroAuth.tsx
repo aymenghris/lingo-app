@@ -6,27 +6,38 @@ import {
 	SignUpButton,
 } from "@clerk/nextjs"
 import Link from "next/link"
+import { ClerkLoadingState } from "@/components/clerk/ClerkLoadingState"
 import { Button } from "@/components/ui/button"
 
 export const HeroAuth = () => (
-	<ClerkLoaded>
-		<SignedIn>
-			<Button size="lg" variant="secondary">
-				<Link href="/learn">continue learning</Link>
-			</Button>
-		</SignedIn>
+	<div className="flex max-w-82 flex-col gap-y-3">
+		<div className="min-h-4">
+			<ClerkLoadingState />
+		</div>
 
-		<SignedOut>
-			<SignUpButton>
-				<Button size="lg" variant="secondary" className="w-full">
-					get started
+		<ClerkLoaded>
+			<SignedIn>
+				<Button size="lg" variant="secondary">
+					<Link href="/learn">continue learning</Link>
 				</Button>
-			</SignUpButton>
-			<SignInButton mode="modal">
-				<Button size="lg" variant="primary-outline" className="w-full">
-					i already have an account
-				</Button>
-			</SignInButton>
-		</SignedOut>
-	</ClerkLoaded>
+			</SignedIn>
+
+			<SignedOut>
+				<SignUpButton>
+					<Button size="lg" variant="secondary" className="w-full">
+						get started
+					</Button>
+				</SignUpButton>
+				<SignInButton mode="modal">
+					<Button
+						size="lg"
+						variant="primary-outline"
+						className="w-full"
+					>
+						i already have an account
+					</Button>
+				</SignInButton>
+			</SignedOut>
+		</ClerkLoaded>
+	</div>
 )
