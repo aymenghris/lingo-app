@@ -7,6 +7,7 @@ export const assetsPath = {
 	},
 }
 
+// Footer
 export const courses = [
 	{
 		flagSrc: "/flags/dz.svg",
@@ -28,4 +29,12 @@ export const courses = [
 		flagSrc: "/flags/jp.svg",
 		title: "Japanese",
 	},
+]
+
+// Sidebar
+export const sidebarItems = [
+	{ iconSrc: "/icons/house.svg", title: "learn" },
+	{ iconSrc: "/icons/medal.svg", title: "leaderboard" },
+	{ iconSrc: "/icons/bullseye.svg", title: "quests" },
+	{ iconSrc: "/icons/shop.svg", title: "shop" },
 ]
