@@ -1,5 +1,5 @@
-import { ClerkLoadingState, HeaderAuth } from "@home/components/clerk"
-import { Logo } from "@home/components/Logo"
+import { ClerkLoadingState, HeaderAuth } from "@home/components"
+import { Logo } from "@/components/Logo"
 
 export const Header = () => {
 	return (

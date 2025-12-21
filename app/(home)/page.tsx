@@ -1,4 +1,4 @@
-import { ClerkLoadingState, HeroAuth } from "@home/components/clerk"
+import { ClerkLoadingState, HeroAuth } from "@home/components"
 import Image from "next/image"
 import { assetsPath } from "@/constants"
 import { cn } from "@/lib/utils"
