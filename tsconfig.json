@@ -20,7 +20,8 @@
 		],
 		"paths": {
 			"@/*": ["./*"],
-			"@home/*": ["./app/(home)/*"]
+			"@home/*": ["./app/(home)/*"],
+			"@learn/*": ["./app/(main)/learn/*"]
 		}
 	},
 	"include": [
