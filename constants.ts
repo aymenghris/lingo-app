@@ -5,6 +5,10 @@ export const assetsPath = {
 		},
 		hero: "/home/hero.svg",
 	},
+	userProgress: {
+		heart: "/user-progress/heart.svg",
+		light: "/user-progress/light.svg",
+	},
 }
 
 // Footer
