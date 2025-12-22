@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+	--spacing-screen-minus-header: calc(100dvh - 48px);
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

@@ -11,7 +11,7 @@ const MainLayout: FC<MainLayout> = ({ children }) => (
 		<MobileHeader />
 		<Sidebar className="hidden lg:flex" />
 		<main className="h-screen max-lg:pt-12.5 lg:pl-64">
-			<div className="h-full bg-rose-400">{children}</div>
+			<div className="mx-auto h-full max-w-264 pt-6">{children}</div>
 		</main>
 	</>
 )
