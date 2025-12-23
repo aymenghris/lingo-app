@@ -11,31 +11,29 @@ export const assetsPath = {
 	},
 }
 
-// Footer
-export const courses = [
-	{
+export const coursesAssets = {
+	arabic: {
 		flagSrc: "/flags/dz.svg",
 		title: "Arabic",
 	},
-	{
+	spanish: {
 		flagSrc: "/flags/es.svg",
 		title: "Spanish",
 	},
-	{
+	french: {
 		flagSrc: "/flags/fr.svg",
 		title: "French",
 	},
-	{
+	italian: {
 		flagSrc: "/flags/it.svg",
 		title: "Italian",
 	},
-	{
+	japanese: {
 		flagSrc: "/flags/jp.svg",
 		title: "Japanese",
 	},
-]
+}
 
-// Sidebar
 export const sidebarItems = [
 	{ iconSrc: "/icons/house.svg", title: "learn" },
 	{ iconSrc: "/icons/medal.svg", title: "leaderboard" },
