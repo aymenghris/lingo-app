@@ -18,7 +18,7 @@ export const Header: FC<HeaderProps> = ({ title }) => {
 				"lg:-mt-6 lg:z-50 lg:pt-6",
 			)}
 		>
-			<Link href="/courses">
+			<Link href="/learn">
 				<Button variant="default-outline" size="sm">
 					<ArrowLeftIcon className="size-5 stroke-2 text-neutral-400" />
 				</Button>
