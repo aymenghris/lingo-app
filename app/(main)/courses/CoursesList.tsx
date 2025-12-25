@@ -2,12 +2,12 @@
 
 import type { FC } from "react"
 import { CourseCard } from "@/app/(main)/courses/CourseCard"
-import type { courses } from "@/database/schema"
+import type { courses, userProgress } from "@/database/schema"
 import { cn } from "@/lib/utils"
 
 interface CoursesListProps {
 	courses: (typeof courses.$inferSelect)[]
-	activeCourseId: number
+	activeCourseId?: (typeof userProgress.$inferSelect)["activeCourseId"]
 }
 export const CoursesList: FC<CoursesListProps> = ({
 	courses,
