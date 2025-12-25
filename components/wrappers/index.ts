@@ -1,2 +1,2 @@
-export * from './StickyWrapper'
-export * from './FeedWrapper'
+export * from "./FeedWrapper"
+export * from "./StickyWrapper"
