@@ -1,22 +1,34 @@
 import { Header } from "@learn/components"
+import { redirect } from "next/navigation"
 import { UserProgress } from "@/components/UserProgress"
 import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
+import { getUserProgress } from "@/database/queries"
 
-const LearnPage = () => (
-	<div className="flex flex-row-reverse gap-12 px-6">
-		<StickyWrapper>
-			<UserProgress
-				activeCourse={{ title: "arabic", flagSrc: "/flags/dz.svg" }}
-				hearts={5}
-				points={100}
-				hasSubscription={false}
-			/>
-		</StickyWrapper>
+const LearnPage = async () => {
+	const userProgressData = await getUserProgress()
 
-		<FeedWrapper>
-			<Header title="Arabic" />
-		</FeedWrapper>
-	</div>
-)
+	if (!userProgressData || !userProgressData?.activeCourse) {
+		redirect("/courses")
+	}
+
+	const { hearts, points, activeCourse } = userProgressData
+
+	return (
+		<div className="flex flex-row-reverse gap-12 px-6">
+			<StickyWrapper>
+				<UserProgress
+					activeCourse={activeCourse}
+					hearts={hearts}
+					points={points}
+					hasSubscription={false}
+				/>
+			</StickyWrapper>
+
+			<FeedWrapper>
+				<Header title={activeCourse.title} />
+			</FeedWrapper>
+		</div>
+	)
+}
 
 export default LearnPage
