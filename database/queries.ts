@@ -44,3 +44,26 @@ export const getUserProgress = cache(async () => {
 			}
 		: null
 })
+
+export const updateExistingProgress = async (
+	userId: string,
+	courseId: number,
+) => {
+	await db
+		.update(userProgress)
+		.set({ activeCourseId: courseId })
+		.where(eq(userProgress.userId, userId))
+}
+
+export const createNewProgress = async (
+	userId: string,
+	courseId: number,
+	user: { firstName: string | null; imageUrl: string },
+) => {
+	await db.insert(userProgress).values({
+		userId,
+		activeCourseId: courseId,
+		userName: user.firstName || "User",
+		userImageSrc: user.imageUrl || "",
+	})
+}
