@@ -4,9 +4,10 @@ import Link from "next/link"
 import type { FC } from "react"
 import { Button } from "@/components/ui/button"
 import { assetsPath } from "@/constants"
+import type { courses } from "@/database/schema"
 
 interface UserProgressProps {
-	activeCourse: { title: string; flagSrc: string }
+	activeCourse: typeof courses.$inferSelect
 	hearts: number
 	points: number
 	hasSubscription: boolean
@@ -24,7 +25,7 @@ export const UserProgress: FC<UserProgressProps> = ({
 			<Link href="/courses">
 				<Button variant="default-outline">
 					<Image
-						src={activeCourse.flagSrc}
+						src={activeCourse.imageSrc}
 						alt={activeCourse.title}
 						width={32}
 						height={32}
