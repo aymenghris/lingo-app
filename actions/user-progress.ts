@@ -1,16 +1,16 @@
 "use server"
 
+import {
+	createNewProgress,
+	getUserProgress,
+	updateExistingProgress,
+} from "@database/queries"
 import { redirect } from "next/navigation"
 import {
 	getAuthenticatedUser,
 	revalidatePaths,
 	validateCourse,
 } from "@/actions/utils"
-import {
-	createNewProgress,
-	getUserProgress,
-	updateExistingProgress,
-} from "@/database/queries"
 
 const PATHS_TO_REVALIDATE = ["/courses", "/learn"] as const
 const REDIRECT_PATH = "/learn"

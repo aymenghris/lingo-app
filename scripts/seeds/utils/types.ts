@@ -1,3 +1,3 @@
-import type { courses } from "@/database/schema"
+import type { courses } from "@database/schemas"
 
 export type Course = typeof courses.$inferInsert

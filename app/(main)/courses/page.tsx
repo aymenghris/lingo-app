@@ -1,5 +1,5 @@
-import { CoursesList } from "@/app/(main)/courses/CoursesList"
-import { getCourses, getUserProgress } from "@/database/queries"
+import { CoursesList } from "@courses/CoursesList"
+import { getCourses, getUserProgress } from "@database/queries"
 
 const CoursesPage = async () => {
 	const [coursesData, userProgressData] = await Promise.all([

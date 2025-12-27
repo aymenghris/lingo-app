@@ -1,8 +1,8 @@
+import { getUserProgress } from "@database/queries"
 import { Header } from "@learn/components"
 import { redirect } from "next/navigation"
 import { UserProgress } from "@/components/UserProgress"
 import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
-import { getUserProgress } from "@/database/queries"
 
 const LearnPage = async () => {
 	const userProgressData = await getUserProgress()

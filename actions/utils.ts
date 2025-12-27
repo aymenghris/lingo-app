@@ -1,6 +1,6 @@
 import { auth, currentUser } from "@clerk/nextjs/server"
+import { getCourseById } from "@database/queries"
 import { revalidatePath } from "next/cache"
-import { getCourseById } from "@/database/queries"
 
 export const revalidatePaths = (paths: readonly string[]) => {
 	for (const path of paths) {
