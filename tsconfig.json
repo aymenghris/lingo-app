@@ -21,7 +21,9 @@
 		"paths": {
 			"@/*": ["./*"],
 			"@home/*": ["./app/(home)/*"],
-			"@learn/*": ["./app/(main)/learn/*"]
+			"@learn/*": ["./app/(main)/learn/*"],
+			"@courses/*": ["./app/(main)/courses/*"],
+			"@database/*": ["./database/_exports/*"]
 		}
 	},
 	"include": [
