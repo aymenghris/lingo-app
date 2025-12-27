@@ -1,15 +1,6 @@
+import { courses } from "@database/schemas"
 import { relations } from "drizzle-orm"
-import { integer, pgTable, serial, text } from "drizzle-orm/pg-core"
-
-export const courses = pgTable("courses", {
-	id: serial("id").primaryKey(),
-	title: text("title").notNull(),
-	imageSrc: text("image_src").notNull(),
-})
-
-export const coursesRelations = relations(courses, ({ many }) => ({
-	userProgress: many(userProgress),
-}))
+import { integer, pgTable, text } from "drizzle-orm/pg-core"
 
 export const userProgress = pgTable("user_progress", {
 	userId: text("user_id").primaryKey(),
