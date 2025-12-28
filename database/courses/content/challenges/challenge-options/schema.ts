@@ -7,7 +7,6 @@ export const challengeOptions = pgTable("challenge_options", {
 	challengeId: integer("challenge_id")
 		.references(() => challenges.id, { onDelete: "cascade" })
 		.notNull(),
-	question: varchar("question").notNull(),
 	isCorrect: boolean("is_correct").notNull(),
 	textContent: varchar("text_content").notNull(),
 	imageSrc: varchar("image_src"),
