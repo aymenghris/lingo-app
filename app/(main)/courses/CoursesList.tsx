@@ -1,11 +1,11 @@
 "use client"
 
+import type { courses, userProgress } from "@database/schemas"
 import { useRouter } from "next/navigation"
 import { type FC, useTransition } from "react"
 import { toast } from "sonner"
 import { upsertUserProgress } from "@/actions/user-progress"
 import { CourseCard } from "@/app/(main)/courses/CourseCard"
-import type { courses, userProgress } from "@/database/schema"
 import { cn } from "@/lib/utils"
 
 interface CoursesListProps {
@@ -27,9 +27,13 @@ export const CoursesList: FC<CoursesListProps> = ({
 		}
 
 		startTransition(() => {
-			upsertUserProgress(courseId).catch(() =>
-				toast.error("Something went wrong"),
-			)
+			upsertUserProgress(courseId)
+				.then(() => {
+					router.push("/learn")
+				})
+				.catch(() => {
+					toast.error("Something went wrong")
+				})
 		})
 	}
 

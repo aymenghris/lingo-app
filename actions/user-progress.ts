@@ -5,7 +5,6 @@ import {
 	getUserProgress,
 	updateExistingProgress,
 } from "@database/queries"
-import { redirect } from "next/navigation"
 import {
 	getAuthenticatedUser,
 	revalidatePaths,
@@ -13,7 +12,6 @@ import {
 } from "@/actions/utils"
 
 const PATHS_TO_REVALIDATE = ["/courses", "/learn"] as const
-const REDIRECT_PATH = "/learn"
 
 export const upsertUserProgress = async (courseId: number) => {
 	const { userId, user } = await getAuthenticatedUser()
@@ -29,5 +27,4 @@ export const upsertUserProgress = async (courseId: number) => {
 	}
 
 	revalidatePaths(PATHS_TO_REVALIDATE)
-	redirect(REDIRECT_PATH)
 }
