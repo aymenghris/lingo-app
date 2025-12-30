@@ -1,32 +1,34 @@
-import { coursesAssets } from "@/constants"
-import type { Course } from "@/scripts/seeds/utils/types"
-
-const { spanish, french, arabic, italian, japanese } = coursesAssets
+import type { Course } from "@seeds/utils/types"
 
 export const coursesData: Course[] = [
 	{
 		id: 1,
-		title: spanish.title,
-		imageSrc: spanish.flagSrc,
+		title: "spanish",
+		code: "es",
+		placement: 1,
 	},
 	{
 		id: 2,
-		title: french.title,
-		imageSrc: french.flagSrc,
+		title: "french",
+		code: "fr",
+		placement: 2,
 	},
 	{
 		id: 3,
-		title: arabic.title,
-		imageSrc: arabic.flagSrc,
+		title: "arabic",
+		code: "dz",
+		placement: 3,
 	},
 	{
 		id: 4,
-		title: italian.title,
-		imageSrc: italian.flagSrc,
+		title: "italian",
+		code: "it",
+		placement: 4,
 	},
 	{
 		id: 5,
-		title: japanese.title,
-		imageSrc: japanese.flagSrc,
+		title: "japanese",
+		code: "jp",
+		placement: 5,
 	},
 ]

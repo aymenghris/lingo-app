@@ -1,8 +1,5 @@
-import { coursesData } from "@/scripts/seeds/data/courses-data"
-import { insertCourses } from "@/scripts/seeds/queries/insert-courses"
-
 const seedDatabase = async () => {
-	await insertCourses(coursesData)
+	// Seed database here
 }
 
 seedDatabase()

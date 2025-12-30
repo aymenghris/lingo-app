@@ -1,5 +1,5 @@
-import * as schema from "@database/schemas"
 import { db } from "@/database/drizzle"
+import * as schema from "@/database/schemas"
 import type {
 	Challenge,
 	ChallengeOptions,
@@ -46,9 +46,9 @@ const insertLessons = async (lessons: Lesson[]) => {
 				placement: lesson.placement,
 			})),
 		)
-		console.log("activities inserted successfully")
+		console.log("lessons inserted successfully")
 	} catch (error) {
-		console.error("Failed to insert activities. Error:", error)
+		console.error("Failed to insert lessons, Error:", error)
 	}
 }
 
@@ -83,6 +83,6 @@ const insertChallengeOptions = async (challengeOptions: ChallengeOptions[]) => {
 		)
 		console.log("challenge options inserted successfully")
 	} catch (error) {
-		console.error("Failed to insert challenge options. Error:", error)
+		console.error("Failed to insert challenge options, Error:", error)
 	}
 }

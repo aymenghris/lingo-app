@@ -4,7 +4,7 @@ import type {
 	courses,
 	lessons,
 	units,
-} from "@database/schemas"
+} from "@/database/schemas"
 
 export type Course = typeof courses.$inferInsert
 export type Unit = typeof units.$inferInsert
