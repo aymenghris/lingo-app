@@ -1,16 +1,16 @@
 "use client"
 
-import type { courses, userProgress } from "@database/schemas"
 import { useRouter } from "next/navigation"
 import { type FC, useTransition } from "react"
 import { toast } from "sonner"
-import { upsertUserProgress } from "@/actions/user-progress"
+import { upsertUserEnrollment } from "@/actions/user-enrollment"
 import { CourseCard } from "@/app/(main)/courses/CourseCard"
+import type { courses, enrollments } from "@/database/schemas"
 import { cn } from "@/lib/utils"
 
 interface CoursesListProps {
 	courses: (typeof courses.$inferSelect)[]
-	activeCourseId?: (typeof userProgress.$inferSelect)["activeCourseId"]
+	activeCourseId: (typeof enrollments.$inferSelect)["courseId"] | null
 }
 export const CoursesList: FC<CoursesListProps> = ({
 	courses,
@@ -27,7 +27,7 @@ export const CoursesList: FC<CoursesListProps> = ({
 		}
 
 		startTransition(() => {
-			upsertUserProgress(courseId)
+			upsertUserEnrollment(courseId)
 				.then(() => {
 					router.push("/learn")
 				})
@@ -50,7 +50,7 @@ export const CoursesList: FC<CoursesListProps> = ({
 					key={course.title}
 					title={course.title}
 					id={course.id}
-					imageSrc={course.imageSrc}
+					imageSrc={`/flags/${course.code}.svg`}
 					onClick={handleCourseClick}
 					disabled={pending}
 					active={course.id === activeCourseId}

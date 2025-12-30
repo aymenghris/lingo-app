@@ -53,6 +53,6 @@ export const CourseCard: FC<CourseCardProps> = ({
 			className="rounded-lg border object-cover"
 		/>
 
-		<p className="text-neutral-700">{title}</p>
+		<p className="text-neutral-700 capitalize">{title}</p>
 	</button>
 )
