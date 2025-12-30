@@ -1,19 +1,19 @@
-import type { courses } from "@database/schemas"
 import { InfinityIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import type { FC } from "react"
 import { Button } from "@/components/ui/button"
 import { assetsPath } from "@/constants"
+import type { courses } from "@/database/schemas"
 
-interface UserProgressProps {
+interface StatsBarProps {
 	activeCourse: typeof courses.$inferSelect
 	hearts: number
 	points: number
 	hasSubscription: boolean
 }
 
-export const UserProgress: FC<UserProgressProps> = ({
+export const StatsBar: FC<StatsBarProps> = ({
 	activeCourse,
 	points,
 	hearts,
@@ -25,7 +25,7 @@ export const UserProgress: FC<UserProgressProps> = ({
 			<Link href="/courses">
 				<Button variant="default-outline">
 					<Image
-						src={activeCourse.imageSrc}
+						src={`/flags/${activeCourse.code}.svg`}
 						alt={activeCourse.title}
 						width={32}
 						height={32}
@@ -38,7 +38,7 @@ export const UserProgress: FC<UserProgressProps> = ({
 			<Link href="/shop">
 				<Button variant="default-outline" className="text-orange-500">
 					<Image
-						src={assetsPath.userProgress.light}
+						src={assetsPath.statsBar.light}
 						alt="points"
 						width={28}
 						height={28}
@@ -52,7 +52,7 @@ export const UserProgress: FC<UserProgressProps> = ({
 			<Link href="/shop">
 				<Button variant="default-outline" className="text-rose-500">
 					<Image
-						src={assetsPath.userProgress.heart}
+						src={assetsPath.statsBar.heart}
 						alt="hearts"
 						width={22}
 						height={22}
