@@ -12,7 +12,8 @@
 		"drizzle:push": "npx drizzle-kit push",
 		"drizzle:generate": "npx drizzle-kit generate",
 		"drizzle:migrate": "npx drizzle-kit migrate",
-		"tsx:seed": "npx tsx ./scripts/seeds/seed.ts"
+		"tsx:seed": "npx tsx ./scripts/seeds/seed.ts",
+		"tsx:runner": "npx tsx ./scripts/ts-runner.ts"
 	},
 	"dependencies": {
 		"@clerk/nextjs": "^6.36.3",
