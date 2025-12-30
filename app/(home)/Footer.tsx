@@ -1,15 +1,19 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { coursesAssets } from "@/constants"
+import { footerCourses } from "@/constants"
 
 export const Footer = () => {
 	return (
 		<footer className="hidden w-full border-slate-200 border-t-2 p-2 lg:block">
 			<div className="mx-auto flex h-full max-w-5xl items-center justify-evenly">
-				{Object.entries(coursesAssets).map(([key, course]) => (
-					<Button key={key} size="lg" variant="default-outline">
+				{footerCourses.map((course) => (
+					<Button
+						key={course.code}
+						size="lg"
+						variant="default-outline"
+					>
 						<Image
-							src={course.flagSrc}
+							src={`/flags/${course.code}.svg`}
 							alt={course.title}
 							width={40}
 							height={32}

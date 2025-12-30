@@ -5,34 +5,34 @@ export const assetsPath = {
 		},
 		hero: "/home/hero.svg",
 	},
-	userProgress: {
-		heart: "/user-progress/heart.svg",
-		light: "/user-progress/light.svg",
+	statsBar: {
+		heart: "/stats-bar/heart.svg",
+		light: "/stats-bar/light.svg",
 	},
 }
 
-export const coursesAssets = {
-	arabic: {
-		flagSrc: "/flags/dz.svg",
-		title: "Arabic",
+export const footerCourses = [
+	{
+		title: "arabic",
+		code: "dz",
 	},
-	spanish: {
-		flagSrc: "/flags/es.svg",
-		title: "Spanish",
+	{
+		title: "spanish",
+		code: "es",
 	},
-	french: {
-		flagSrc: "/flags/fr.svg",
-		title: "French",
+	{
+		title: "french",
+		code: "fr",
 	},
-	italian: {
-		flagSrc: "/flags/it.svg",
-		title: "Italian",
+	{
+		title: "italian",
+		code: "it",
 	},
-	japanese: {
-		flagSrc: "/flags/jp.svg",
-		title: "Japanese",
+	{
+		title: "japanese",
+		code: "jp",
 	},
-}
+]
 
 export const sidebarItems = [
 	{ iconSrc: "/icons/house.svg", title: "learn" },
