@@ -1,10 +1,10 @@
-import { courses } from "@database/schemas"
 import { eq } from "drizzle-orm"
 import { cache } from "react"
 import { db } from "@/database/drizzle"
+import { courses } from "@/database/schemas"
 
 export const getCourses = cache(async () => {
-	return db.select().from(courses).orderBy(courses.id)
+	return db.select().from(courses).orderBy(courses.placement)
 })
 
 export const getCourseById = cache(async (courseId: number) => {

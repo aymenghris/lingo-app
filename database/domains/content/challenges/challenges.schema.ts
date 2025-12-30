@@ -1,6 +1,6 @@
-import { challengeOptions, challengeProgress, lessons } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import { integer, pgEnum, pgTable, serial, varchar } from "drizzle-orm/pg-core"
+import { challengeOptions, lessons } from "@/database/schemas"
 
 export const challengesEnum = pgEnum("challenge_type", ["select", "assist"])
 
@@ -20,5 +20,4 @@ export const challengesRelation = relations(challenges, ({ one, many }) => ({
 		references: [lessons.id],
 	}),
 	challengeOptions: many(challengeOptions),
-	challengeProgress: many(challengeProgress),
 }))
