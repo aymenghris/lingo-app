@@ -8,7 +8,7 @@ const buttonVariants = cva(
 	cn(
 		"inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap",
 		"font-bold text-sm uppercase tracking-wide",
-		"rounded-xl outline-none transition-all",
+		"cursor-pointer rounded-xl outline-none transition-all",
 		"focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
 		"disabled:pointer-events-none disabled:opacity-50",
 		"aria-invalid:border-destructive aria-invalid:ring-destructive/20",
