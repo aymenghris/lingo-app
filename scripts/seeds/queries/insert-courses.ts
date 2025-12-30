@@ -1,5 +1,5 @@
+import * as schema from "@database/schemas"
 import { db } from "@/database/drizzle"
-import * as schema from "@/database/schemas"
 import type { Course } from "@/scripts/seeds/utils/types"
 
 export const insertCourses = async (courses: Course[]) => {

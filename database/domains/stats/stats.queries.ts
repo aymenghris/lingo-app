@@ -1,6 +1,6 @@
+import { stats } from "@database/schemas"
 import { eq } from "drizzle-orm"
 import { db } from "@/database/drizzle"
-import { stats } from "@/database/schemas"
 import { getUserId } from "@/utils/clerk"
 
 export const getUsersStats = async () => {

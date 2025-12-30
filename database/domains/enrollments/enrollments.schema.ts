@@ -1,3 +1,4 @@
+import { courses, users } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import {
 	boolean,
@@ -7,7 +8,6 @@ import {
 	text,
 	timestamp,
 } from "drizzle-orm/pg-core"
-import { courses, users } from "@/database/schemas"
 
 export const enrollments = pgTable(
 	"users_enrollments",

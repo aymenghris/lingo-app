@@ -1,5 +1,5 @@
 import { CoursesList } from "@courses/CoursesList"
-import { getCourses, getUserActiveCourseId } from "@/database//queries"
+import { getCourses, getUserActiveCourseId } from "@database/queries"
 
 const CoursesPage = async () => {
 	const [coursesData, userActiveCourseId] = await Promise.all([

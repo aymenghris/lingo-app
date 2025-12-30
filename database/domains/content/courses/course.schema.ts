@@ -1,6 +1,6 @@
+import { enrollments, units } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import { integer, pgTable, serial, text } from "drizzle-orm/pg-core"
-import { enrollments, units } from "@/database/schemas"
 
 export const courses = pgTable("courses", {
 	id: serial("id").primaryKey(),

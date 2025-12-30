@@ -1,8 +1,8 @@
+import { getCourseById } from "@database/queries"
+import { enrollments } from "@database/schemas"
 import { and, eq } from "drizzle-orm"
 import { cache } from "react"
 import { db } from "@/database/drizzle"
-import { getCourseById } from "@/database/queries"
-import { enrollments } from "@/database/schemas"
 import { getUserId } from "@/utils/clerk"
 
 export const addUserNewEnrollment = async (

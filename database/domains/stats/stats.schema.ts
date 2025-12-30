@@ -1,6 +1,6 @@
+import { users } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import { integer, pgTable, serial, text } from "drizzle-orm/pg-core"
-import { users } from "@/database/schemas"
 
 export const stats = pgTable("users_stats", {
 	id: serial("id").primaryKey(),

@@ -1,5 +1,5 @@
+import * as schema from "@database/schemas"
 import { db } from "@/database/drizzle"
-import * as schema from "@/database/schemas"
 import type {
 	Challenge,
 	ChallengeOptions,

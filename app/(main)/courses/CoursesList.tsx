@@ -1,11 +1,11 @@
 "use client"
 
+import type { courses, enrollments } from "@database/schemas"
 import { useRouter } from "next/navigation"
 import { type FC, useTransition } from "react"
 import { toast } from "sonner"
 import { upsertUserEnrollment } from "@/actions/user-enrollment"
 import { CourseCard } from "@/app/(main)/courses/CourseCard"
-import type { courses, enrollments } from "@/database/schemas"
 import { cn } from "@/lib/utils"
 
 interface CoursesListProps {

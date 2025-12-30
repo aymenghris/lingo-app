@@ -1,6 +1,6 @@
+import { enrollments, stats } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core"
-import { enrollments, stats } from "@/database/schemas"
 
 export const users = pgTable("users", {
 	id: text("id").primaryKey(),

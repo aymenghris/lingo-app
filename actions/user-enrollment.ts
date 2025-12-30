@@ -1,11 +1,11 @@
 "use server"
 
-import { revalidatePaths } from "@/actions/utils"
 import {
 	addUserNewEnrollment,
 	isUserEnrolledCourse,
 	updateExistedUserActiveCourse,
-} from "@/database/queries"
+} from "@database/queries"
+import { revalidatePaths } from "@/actions/utils"
 import { getUserId } from "@/utils/clerk"
 
 const PATHS_TO_REVALIDATE = ["/courses", "/learn"] as const

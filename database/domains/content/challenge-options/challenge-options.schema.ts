@@ -1,6 +1,6 @@
+import { challenges } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import { boolean, integer, pgTable, serial, varchar } from "drizzle-orm/pg-core"
-import { challenges } from "@/database/schemas"
 
 export const challengeOptions = pgTable("challenge_options", {
 	id: serial("id").primaryKey(),

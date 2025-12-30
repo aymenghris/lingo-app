@@ -23,7 +23,8 @@
 			"@home/*": ["./app/(home)/*"],
 			"@learn/*": ["./app/(main)/learn/*"],
 			"@courses/*": ["./app/(main)/courses/*"],
-			"@database/*": ["./database/_exports/*"]
+			"@database/*": ["./database/_exports/*"],
+			"@seeds/*": ["./scripts/seeds/*"]
 		}
 	},
 	"include": [
