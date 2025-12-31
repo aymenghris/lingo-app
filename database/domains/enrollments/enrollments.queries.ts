@@ -93,7 +93,7 @@ export const getUserEnrollment = cache(
 	},
 )
 
-export const getUserActiveEnrollment = async () => {
+export const getUserActiveEnrollment = cache(async () => {
 	const userId = await getUserId()
 
 	const data = await db
@@ -109,8 +109,9 @@ export const getUserActiveEnrollment = async () => {
 	console.log(
 		`Successfully retrieved active enrollment for userId: ${userId}.`,
 	)
+
 	return data[0]
-}
+})
 
 export const getUserActiveCourseId = async () => {
 	const userId = await getUserId()
@@ -130,6 +131,7 @@ export const getUserActiveCourseId = async () => {
 	console.log(
 		`Successfully retrieved active course ID for userId: ${userId}.`,
 	)
+
 	return data[0].courseId
 }
 

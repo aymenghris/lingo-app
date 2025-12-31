@@ -5,5 +5,7 @@ export * from "../domains/content/units/units.queries"
 
 export * from "../domains/content/lessons/lessons.queries"
 
+export * from "../domains/content/challenges/challenges.queries"
+
 export * from "../domains/enrollments/enrollments.queries"
 export * from "../domains/stats/stats.queries"

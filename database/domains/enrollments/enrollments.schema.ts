@@ -21,10 +21,10 @@ export const enrollments = pgTable(
 		currentUnitPlacement: integer("current_unit_placement")
 			.notNull()
 			.default(1),
-		currentLessonPlacement: integer("current_activity_placement")
+		currentLessonPlacement: integer("current_lesson_placement")
 			.notNull()
 			.default(1),
-		currentChallengePlacement: integer("current_exercise_placement")
+		currentChallengePlacement: integer("current_challenge_placement")
 			.notNull()
 			.default(1),
 		isActive: boolean("is_active").default(false).notNull(),
