@@ -73,6 +73,12 @@ const buttonVariants = cva(
 					"bg-white",
 					"hover:bg-indigo-50",
 				),
+				locked: cn(
+					"",
+					"text-primary-foreground",
+					"border-neutral-400 border-b-4 bg-neutral-300",
+					"hover:bg-neutral-200/90 active:border-b-0",
+				),
 			},
 			size: {
 				default: "h-11 px-4 py-2 has-[>svg]:px-3",
