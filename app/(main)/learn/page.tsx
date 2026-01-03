@@ -1,23 +1,24 @@
-import { getUserProgress } from "@database/queries"
-import { Header } from "@learn/components"
+import { getUnits, getUserActiveCourse, getUsersStats } from "@database/queries"
+import { Unit } from "@learn/components/unit/Unit"
 import { redirect } from "next/navigation"
-import { UserProgress } from "@/components/UserProgress"
+import { StatsBar } from "@/components/StatsBar"
 import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
+import { Header } from "./components/Header"
 
 const LearnPage = async () => {
-	const userProgressData = await getUserProgress()
+	const userActiveCourse = await getUserActiveCourse()
 
-	if (!userProgressData || !userProgressData?.activeCourse) {
+	if (!userActiveCourse) {
 		redirect("/courses")
 	}
-
-	const { hearts, points, activeCourse } = userProgressData
+	const { hearts, points } = await getUsersStats()
+	const unitsData = await getUnits(userActiveCourse.id)
 
 	return (
 		<div className="flex flex-row-reverse gap-12 px-6">
 			<StickyWrapper>
-				<UserProgress
-					activeCourse={activeCourse}
+				<StatsBar
+					activeCourse={userActiveCourse}
 					hearts={hearts}
 					points={points}
 					hasSubscription={false}
@@ -25,7 +26,16 @@ const LearnPage = async () => {
 			</StickyWrapper>
 
 			<FeedWrapper>
-				<Header title={activeCourse.title} />
+				<Header title={userActiveCourse.title} />
+				{unitsData.map((unit) => (
+					<Unit
+						key={unit.id}
+						unitId={unit.id}
+						unitTitle={unit.title}
+						unitDescription={unit.description}
+						unitPlacement={unit.placement}
+					/>
+				))}
 			</FeedWrapper>
 		</div>
 	)

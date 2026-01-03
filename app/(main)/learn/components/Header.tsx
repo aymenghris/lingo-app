@@ -24,7 +24,9 @@ export const Header: FC<HeaderProps> = ({ title }) => {
 				</Button>
 			</Link>
 
-			<h1 className="text-center font-bold text-lg">{title}</h1>
+			<h1 className="text-center font-bold text-lg capitalize">
+				{title}
+			</h1>
 			<div />
 		</div>
 	)
