@@ -12,7 +12,8 @@ export const insertCourses = async (courses: Course[]) => {
 				placement: course.placement,
 			})),
 		)
+		console.log("Courses inserted successfully")
 	} catch (error) {
-		console.error("Error inserting courses:", error)
+		console.error("Failed to insert courses, Error:", error)
 	}
 }

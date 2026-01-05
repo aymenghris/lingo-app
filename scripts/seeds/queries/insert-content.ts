@@ -46,7 +46,7 @@ const insertLessons = async (lessons: Lesson[]) => {
 				placement: lesson.placement,
 			})),
 		)
-		console.log("lessons inserted successfully")
+		console.log("Lessons inserted successfully")
 	} catch (error) {
 		console.error("Failed to insert lessons, Error:", error)
 	}
@@ -63,7 +63,7 @@ const insertChallenges = async (challenges: Challenge[]) => {
 				placement: challenge.placement,
 			})),
 		)
-		console.log("challenges inserted successfully")
+		console.log("Challenges inserted successfully")
 	} catch (error) {
 		console.error("Failed to insert challenges. Error:", error)
 	}
@@ -81,7 +81,7 @@ const insertChallengeOptions = async (challengeOptions: ChallengeOptions[]) => {
 				audioSrc: option.audioSrc,
 			})),
 		)
-		console.log("challenge options inserted successfully")
+		console.log("Challenge options inserted successfully")
 	} catch (error) {
 		console.error("Failed to insert challenge options, Error:", error)
 	}
