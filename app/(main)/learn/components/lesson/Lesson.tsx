@@ -14,7 +14,7 @@ export const Lesson: FC<LessonsButtonProps> = async ({
 	lessonId,
 	lessonPlacement,
 }) => {
-	const lessonState = await determineLessonState(lessonPlacement)
+	const lessonState = await determineLessonState(lessonId)
 	const lessonProgressPercentage =
 		await calculateLessonProgressPercentage(lessonId)
 

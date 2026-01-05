@@ -1,20 +1,23 @@
 import {
 	getChallengesWithCompletedStatus,
+	getCompletedLessonIds,
 	getUserActiveEnrollment,
 } from "@database/queries"
 import { cache } from "react"
 
-export const determineLessonState = async (lessonPlacement: number) => {
-	const { currentLessonPlacement } = await getUserActiveEnrollment()
+export const determineLessonState = async (lessonId: number) => {
+	const { currentLessonId } = await getUserActiveEnrollment()
+	const completedLessonsIds = await getCompletedLessonIds()
 
-	if (lessonPlacement === currentLessonPlacement) {
+	if (lessonId === currentLessonId) {
 		return "current"
 	}
 
-	if (lessonPlacement <= currentLessonPlacement) {
+	if (completedLessonsIds.includes(lessonId)) {
 		return "completed"
+	} else {
+		return "locked"
 	}
-	return "locked"
 }
 
 export const calculateLessonProgressPercentage = cache(
