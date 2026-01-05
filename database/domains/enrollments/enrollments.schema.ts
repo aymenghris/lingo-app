@@ -1,4 +1,4 @@
-import { courses, users } from "@database/schemas"
+import { challenges, courses, lessons, units, users } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import {
 	boolean,
@@ -18,16 +18,16 @@ export const enrollments = pgTable(
 		courseId: integer("course_id")
 			.notNull()
 			.references(() => courses.id, { onDelete: "cascade" }),
-		currentUnitPlacement: integer("current_unit_placement")
+		currentUnitId: integer("current_unit_id")
 			.notNull()
-			.default(1),
-		currentLessonPlacement: integer("current_lesson_placement")
+			.references(() => units.id),
+		currentLessonId: integer("current_lesson_id")
 			.notNull()
-			.default(1),
-		currentChallengePlacement: integer("current_challenge_placement")
+			.references(() => lessons.id),
+		currentChallengeId: integer("current_challenge_id")
 			.notNull()
-			.default(1),
-		isActive: boolean("is_active").default(false).notNull(),
+			.references(() => challenges.id),
+		isActive: boolean("is_active").notNull(),
 		enrollmentDate: timestamp("enrollment_date").defaultNow(),
 	},
 	(table) => [primaryKey({ columns: [table.userId, table.courseId] })],
@@ -41,5 +41,17 @@ export const enrollmentRelation = relations(enrollments, ({ one }) => ({
 	course: one(courses, {
 		fields: [enrollments.courseId],
 		references: [courses.id],
+	}),
+	unit: one(units, {
+		fields: [enrollments.currentUnitId],
+		references: [units.id],
+	}),
+	lesson: one(lessons, {
+		fields: [enrollments.currentLessonId],
+		references: [lessons.id],
+	}),
+	challenge: one(challenges, {
+		fields: [enrollments.currentChallengeId],
+		references: [challenges.id],
 	}),
 }))
