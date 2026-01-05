@@ -17,10 +17,10 @@ const getCycleDirection = (
 
 	/*
 	 * Calculate the current cycle. If a unit contains multiple cycles
-	 * the cycle is determined by dividing the lesson order by the cycle length.
+	 * the cycle is determined by dividing the lesson placement by the cycle length.
 	 * For example:
-	 *  Lesson order: 3, cycle length: 4 → Math.floor(3 / 4) = 0 (Cycle 0)
-	 *  Lesson order: 4, cycle length: 4 → Math.floor(4 / 4) = 1 (Cycle 1)
+	 *  Lesson placement: 3, cycle length: 4 → Math.floor(3 / 4) = 0 (Cycle 0)
+	 *  Lesson placement: 4, cycle length: 4 → Math.floor(4 / 4) = 1 (Cycle 1)
 	 */
 	const cycle = Math.floor(lessonPlacement / cycleLength)
 
@@ -36,8 +36,9 @@ export const calculateLessonPosition = (
 	unitPlacement: number,
 	lessonPlacement: number,
 ) => {
-	const cycleLength = 4 //  Buttons number in a cycle
-	const cycleIndex = (lessonPlacement - 1) % cycleLength
+	// Buttons number in a cycle, 4 buttons from 0 to 3
+	const cycleLength = 4
+	const cycleIndex = lessonPlacement % cycleLength
 	const factor = getCycleDirection(
 		unitPlacement,
 		lessonPlacement,

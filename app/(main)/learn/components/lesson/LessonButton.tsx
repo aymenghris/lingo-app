@@ -30,7 +30,8 @@ export const LessonButton: FC<LessonButtonProps> = ({
 		totalLessonsCount,
 	)
 
-	const leftPosition = `${calculateLessonPosition(unitPlacement, lessonPlacement)}px`
+	// Convert to a 0-based index for calculation.
+	const leftPosition = `${calculateLessonPosition(unitPlacement, lessonPlacement - 1)}px`
 
 	const marginTop =
 		lessonIndexState === "first" && lessonState !== "completed"
