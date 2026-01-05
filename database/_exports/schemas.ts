@@ -1,3 +1,6 @@
+export * from "../domains/completed-content/completed-challenges/completed-challenges.schema"
+export * from "../domains/completed-content/completed-lessons/completed-lessons.schema"
+
 export * from "../domains/content/challenge-options/challenge-options.schema"
 export * from "../domains/content/challenges/challenges.schema"
 
