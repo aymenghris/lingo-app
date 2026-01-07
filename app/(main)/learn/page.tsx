@@ -1,8 +1,9 @@
-import { getUnits, getUserActiveCourse, getUsersStats } from "@database/queries"
+import { getUserActiveCourse, getUsersStats } from "@database/queries"
 import { Unit } from "@learn/components/unit/Unit"
 import { redirect } from "next/navigation"
 import { StatsBar } from "@/components/StatsBar"
 import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
+import { getUnitsWithProgress } from "@/services/unit-service"
 import { Header } from "./components/Header"
 
 const LearnPage = async () => {
@@ -12,7 +13,7 @@ const LearnPage = async () => {
 		redirect("/courses")
 	}
 	const { hearts, points } = await getUsersStats()
-	const unitsData = await getUnits(userActiveCourse.id)
+	const unitsData = await getUnitsWithProgress(userActiveCourse.id)
 
 	return (
 		<div className="flex flex-row-reverse gap-12 px-6">
@@ -30,10 +31,12 @@ const LearnPage = async () => {
 				{unitsData.map((unit) => (
 					<Unit
 						key={unit.id}
-						unitId={unit.id}
-						unitTitle={unit.title}
-						unitDescription={unit.description}
-						unitPlacement={unit.placement}
+						id={unit.id}
+						title={unit.title}
+						description={unit.description}
+						placement={unit.placement}
+						totalLessons={unit.totalLessons}
+						lessons={unit.lessons}
 					/>
 				))}
 			</FeedWrapper>

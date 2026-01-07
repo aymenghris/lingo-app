@@ -1,40 +1,43 @@
-import { getLessons } from "@database/queries"
 import { Lesson } from "@learn/components/lesson/Lesson"
 import { UnitBanner } from "@learn/components/unit/UnitBanner"
 import type { FC } from "react"
-import { UnitProvider } from "@/provider/UnitProvider"
+import type { LessonsWithChallenges } from "@/types/lessons.types"
 
 interface UnitProps {
-	unitId: number
-	unitTitle: string
-	unitDescription: string
-	unitPlacement: number
+	id: number
+	title: string
+	description: string
+	placement: number
+	totalLessons: number
+	lessons: LessonsWithChallenges[]
 }
 
 export const Unit: FC<UnitProps> = async ({
-	unitId,
-	unitTitle,
-	unitDescription,
-	unitPlacement,
+	title,
+	description,
+	placement,
+	totalLessons,
+	lessons,
 }) => {
-	const lessonsData = await getLessons(unitId)
-	const totalLesson = lessonsData.length
-
+	const unitInfo = { placement, totalLessons }
 	return (
-		<UnitProvider unitPlacement={unitPlacement} totalLessons={totalLesson}>
-			<UnitBanner title={unitTitle} description={unitDescription} />
+		<>
+			<UnitBanner title={title} description={description} />
 
 			<div className="flex flex-col items-center">
-				{lessonsData.map((lesson) => {
+				{lessons.map((lesson) => {
 					return (
 						<Lesson
 							key={lesson.id}
-							lessonId={lesson.id}
-							lessonPlacement={lesson.placement}
+							id={lesson.id}
+							placement={lesson.placement}
+							state={lesson.state}
+							challenges={lesson.challenges}
+							unit={unitInfo}
 						/>
 					)
 				})}
 			</div>
-		</UnitProvider>
+		</>
 	)
 }
