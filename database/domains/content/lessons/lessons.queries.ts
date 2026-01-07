@@ -10,10 +10,33 @@ export const getLessons = async (unitId: number) => {
 		.orderBy(lessons.placement)
 }
 
-export const getLessonById = async (lessonId: number) => {
-	const [lesson] = await db.select().from(lessons).where(eq(lessons.id, lessonId)).limit(1)
+export const getLesson = async (lessonId: number) => {
+	const [lesson] = await db
+		.select()
+		.from(lessons)
+		.where(eq(lessons.id, lessonId))
+		.limit(1)
 
 	return lesson
+}
+
+export const getLessonContent = async (lessonId: number) => {
+	const lessonContent = await db.query.lessons.findFirst({
+		where: eq(lessons.id, lessonId),
+		with: {
+			challenges: {
+				with: {
+					challengeOptions: true,
+				},
+			},
+		},
+	})
+
+	if (!lessonContent) {
+		throw new Error("Lesson not found")
+	}
+
+	return lessonContent
 }
 
 export const getFirstLesson = async (unitId: number) => {

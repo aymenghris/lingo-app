@@ -1,5 +1,6 @@
 // biome-ignore assist/source/organizeImports: <better for readability>
 export * from "../domains/completed-content/completed-lessons/completed-lessons.queries"
+export * from "../domains/completed-content/completed-challenges/completed-challenges.queries"
 
 export * from "../domains/content/courses/course.queries"
 
