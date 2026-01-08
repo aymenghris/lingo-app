@@ -9,6 +9,9 @@ export const assetsPath = {
 		heart: "/stats-bar/heart.svg",
 		light: "/stats-bar/light.svg",
 	},
+	modal: {
+		mascotSad: "/modals/mascot-sad.svg",
+	},
 }
 
 export const footerCourses = [
