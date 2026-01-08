@@ -22,6 +22,7 @@
 			"@/*": ["./*"],
 			"@home/*": ["./app/(home)/*"],
 			"@learn/*": ["./app/(main)/learn/*"],
+			"@lesson/*": ["./app/lesson/*"],
 			"@courses/*": ["./app/(main)/courses/*"],
 			"@database/*": ["./database/_exports/*"],
 			"@seeds/*": ["./scripts/seeds/*"]
