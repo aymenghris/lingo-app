@@ -7,3 +7,7 @@ export type ChallengeWithCompletedState = typeof challenges.$inferSelect & {
 export type ChallengeWithOptions = ChallengeWithCompletedState & {
 	challengeOptions: (typeof challengeOptions.$inferSelect)[]
 }
+
+export type ChallengeStatus = "correct" | "wrong" | "none"
+
+export type ChallengeTypes = typeof challenges.$inferSelect.type
