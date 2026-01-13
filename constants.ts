@@ -1,16 +1,12 @@
 export const assetsPath = {
-	home: {
-		header: {
-			logo: "/home/header/mascot.svg",
-		},
-		hero: "/home/hero.svg",
+	public: {
+		hero: "/hero.svg",
+		mascot: "/mascot.svg",
+		mascotSad: "/mascot-sad.svg",
 	},
 	statsBar: {
 		heart: "/stats-bar/heart.svg",
 		light: "/stats-bar/light.svg",
-	},
-	modal: {
-		mascotSad: "/modals/mascot-sad.svg",
 	},
 }
 
