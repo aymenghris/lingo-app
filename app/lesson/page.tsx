@@ -1,6 +1,6 @@
 import { getUserActiveEnrollment, getUsersStats } from "@database/queries"
 import { redirect } from "next/navigation"
-import { Quiz } from "@/app/lesson/Quiz"
+import { Quiz } from "@/app/lesson/components/quiz/Quiz"
 import { getLessonWithProgress } from "@/services/lesson-service"
 import { lessonProgressPercentage } from "@/utils/lesson-progress-percentage"
 
@@ -22,8 +22,8 @@ const LessonPage = async () => {
 		<div>
 			<Quiz
 				initialLessonId={currentLessonId}
-				initialLessonChallenges={lessonContent.challenges}
-				initialLessonPercentage={initialLessonPercentage}
+				initialChallenges={lessonContent.challenges}
+				initialPercentage={initialLessonPercentage}
 				initialHearts={hearts}
 				userSubscription={null}
 			/>
