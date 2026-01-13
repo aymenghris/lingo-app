@@ -13,7 +13,7 @@ const HomePage = () => {
 			)}
 		>
 			<div className="relative mb-8 size-60 lg:mb-0 lg:size-106">
-				<Image src={assetsPath.home.hero} alt="hero" fill />
+				<Image src={assetsPath.public.hero} alt="hero" fill />
 			</div>
 			<div className="flex flex-col items-center gap-y-8">
 				<h1 className="max-w-120 text-center font-bold text-neutral-600 text-xl lg:text-3xl">

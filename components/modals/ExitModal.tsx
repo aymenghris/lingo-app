@@ -35,7 +35,7 @@ export const ExitModal = () => {
 				<DialogHeader className="flex items-center justify-center">
 					<div className="mb-5">
 						<Image
-							src={assetsPath.modal.mascotSad}
+							src={assetsPath.public.mascotSad}
 							width={80}
 							height={80}
 							alt="sad mascot"
