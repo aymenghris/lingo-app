@@ -1,4 +1,4 @@
-import { getUserActiveCourse, getUsersStats } from "@database/queries"
+import { getUserActiveCourse, getUserStats } from "@database/queries"
 import { Unit } from "@learn/components/unit/Unit"
 import { redirect } from "next/navigation"
 import { StatsBar } from "@/components/StatsBar"
@@ -12,7 +12,7 @@ const LearnPage = async () => {
 	if (!userActiveCourse) {
 		redirect("/courses")
 	}
-	const { hearts, points } = await getUsersStats()
+	const { hearts, points } = await getUserStats()
 	const unitsData = await getUnitsWithProgress(userActiveCourse.id)
 
 	return (
