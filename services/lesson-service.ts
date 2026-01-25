@@ -1,20 +1,37 @@
-import { getCompletedChallengesIds, getLessonContent } from "@database/queries"
+import {
+	getCompletedChallengesIds,
+	getCompletedLessonIds,
+	getLessonContent,
+} from "@database/queries"
 
 export const getLessonWithProgress = async (lessonId: number) => {
-	const [lesson, completedIds] = await Promise.all([
+	const [lesson, completedLessonsIds] = await Promise.all([
 		getLessonContent(lessonId),
-		getCompletedChallengesIds(),
+		getCompletedLessonIds(),
 	])
 
-	// Optimization: Convert array to Set for O(1) lookup
-	// If completedIds is [1, 2, 3], checking Set.has(2) is faster than Array.includes(2)
-	const completedSet = new Set(completedIds)
+	const isLessonCompleted = completedLessonsIds.has(lessonId)
+
+	// If the lesson is completed → all challenges are considered completed
+	if (isLessonCompleted) {
+		return {
+			...lesson,
+			completed: true,
+			challenges: lesson.challenges.map((challenge) => ({
+				...challenge,
+				completed: true,
+			})),
+		}
+	}
+
+	const completedChallengesIds = await getCompletedChallengesIds()
 
 	return {
 		...lesson,
+		completed: false,
 		challenges: lesson.challenges.map((challenge) => ({
 			...challenge,
-			completed: completedSet.has(challenge.id),
+			completed: completedChallengesIds.has(challenge.id),
 		})),
 	}
 }
