@@ -1,4 +1,4 @@
-import { enrollments, stats } from "@database/schemas"
+import { enrollments, usersStats } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import { pgTable, text, timestamp } from "drizzle-orm/pg-core"
 
@@ -13,8 +13,8 @@ export const users = pgTable("users", {
 
 export const userRelation = relations(users, ({ many, one }) => ({
 	enrollments: many(enrollments),
-	stats: one(stats, {
+	stats: one(usersStats, {
 		fields: [users.id],
-		references: [stats.userId],
+		references: [usersStats.userId],
 	}),
 }))
