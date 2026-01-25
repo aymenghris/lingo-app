@@ -4,15 +4,15 @@ import { useAudio, useKey } from "react-use"
 
 interface UseChallengeCardProps {
 	audioSrc?: string | null
-	shortcut: string
-	onClick: () => void
+	placement: number
+	onOptionClick: () => void
 	disabled?: boolean
 }
 
 export const useChallengeCard = ({
 	audioSrc,
-	shortcut,
-	onClick,
+	placement,
+	onOptionClick,
 	disabled,
 }: UseChallengeCardProps) => {
 	const [audioElement, , controls] = useAudio({ src: audioSrc || "" })
@@ -20,10 +20,10 @@ export const useChallengeCard = ({
 	const handleClick = useCallback(() => {
 		if (disabled) return
 		controls.play()
-		onClick()
-	}, [disabled, onClick, controls])
+		onOptionClick()
+	}, [disabled, onOptionClick, controls])
 
-	useKey(shortcut, handleClick, {}, [handleClick])
+	useKey(placement.toString(), handleClick, {}, [handleClick])
 
 	return {
 		audioElement,
