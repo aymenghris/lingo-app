@@ -1,5 +1,7 @@
 import type { challenges, lessons } from "@database/schemas"
 
+export type Lesson = typeof lessons.$inferSelect
+
 export type LessonState = "completed" | "current" | "locked"
 
 export type LessonsWithChallenges = typeof lessons.$inferSelect & {
