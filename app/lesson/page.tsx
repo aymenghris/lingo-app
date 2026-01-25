@@ -1,6 +1,6 @@
-import { getUserActiveEnrollment, getUsersStats } from "@database/queries"
+import { getUserActiveEnrollment, getUserStats } from "@database/queries"
+import { QuizOrchestrator } from "@lesson/components/quiz/QuizOrchestrator"
 import { redirect } from "next/navigation"
-import { Quiz } from "@/app/lesson/components/quiz/Quiz"
 import { getLessonWithProgress } from "@/services/lesson-service"
 import { lessonProgressPercentage } from "@/utils/lesson-progress-percentage"
 
@@ -11,23 +11,22 @@ const LessonPage = async () => {
 		redirect("/courses")
 	}
 	const { currentLessonId } = userActiveEnrolment
-	const lessonContent = await getLessonWithProgress(currentLessonId)
-	const { hearts } = await getUsersStats()
+	const lesson = await getLessonWithProgress(currentLessonId)
+	const { hearts } = await getUserStats()
 
-	const initialLessonPercentage = lessonProgressPercentage(
-		lessonContent.challenges,
-	)
+	// If it's a practice
+	const initialLessonPercentage = lesson.completed
+		? 0
+		: lessonProgressPercentage(lesson.challenges)
 
 	return (
-		<div>
-			<Quiz
-				initialLessonId={currentLessonId}
-				initialChallenges={lessonContent.challenges}
-				initialPercentage={initialLessonPercentage}
-				initialHearts={hearts}
-				userSubscription={null}
-			/>
-		</div>
+		<QuizOrchestrator
+			initialLessonId={currentLessonId}
+			initialChallenges={lesson.challenges}
+			initialHearts={hearts}
+			initialPercentage={initialLessonPercentage}
+			initialQuizMode={lesson.completed ? "practice" : "learn"}
+		/>
 	)
 }
 
