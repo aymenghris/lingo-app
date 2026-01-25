@@ -1,59 +1,53 @@
-import { useCallback, useState } from "react"
-import type {
-	ChallengeStatus,
-	ChallengeWithOptions,
-} from "@/types/challenges.types"
+import { useChallengeInteraction } from "@/hooks/useChallengeInteraction"
+import { useQuizInteractionStoreSelector } from "@/stores/use-quiz-interaction-store"
+import { useQuizSessionStoreSelector } from "@/stores/use-quiz-session-store"
 
-interface UseQuizProps {
-	initialChallenges: ChallengeWithOptions[]
-	initialHearts: number
-	initialPercentage: number
-}
+export const useQuiz = () => {
+	const { getCurrentChallenge, nextChallenge } = useQuizSessionStoreSelector()
+	const currentChallenge = getCurrentChallenge()
 
-export const useQuiz = ({
-	initialChallenges,
-	initialHearts,
-	initialPercentage,
-}: UseQuizProps) => {
-	const [hearts, setHearts] = useState(initialHearts)
-	const [percentage, setPercentage] = useState(initialPercentage)
-	const [selectedOption, setSelectedOption] = useState<number>()
-	const [status, setStatus] = useState<ChallengeStatus>("none")
-	const [challenges] = useState(initialChallenges)
+	const { selectedOptionId, challengeStatus, resetInteraction } =
+		useQuizInteractionStoreSelector()
 
-	const [activeIndex, setActiveIndex] = useState(() => {
-		const uncompleted = initialChallenges.findIndex(
-			(challenge) => !challenge.completed,
-		)
-		return uncompleted === -1 ? 0 : uncompleted
-	})
-
-	const currentChallenge = challenges[activeIndex]
-
-	const selectOption = useCallback(
-		(id: number) => {
-			if (status !== "none") return
-			setSelectedOption(id)
-		},
-		[status],
-	)
+	const { checkAnswer, handleCorrectAnswer, handleWrongAnswer } =
+		useChallengeInteraction()
 
 	const title =
 		currentChallenge.type === "assist"
 			? "select the correct meaning"
 			: currentChallenge.question
 
+	const onContinue = () => {
+		if (!selectedOptionId) return
+
+		if (challengeStatus === "correct") {
+			// User succeeded, clicked continue to go next
+			nextChallenge()
+			resetInteraction()
+			return
+		}
+
+		if (challengeStatus === "wrong") {
+			// User failed, clicked continue to try again (or lose heart)
+			resetInteraction()
+			return
+		}
+
+		// Status is "none", so we check the answer
+		const result = checkAnswer()
+
+		if (result === "correct") {
+			handleCorrectAnswer()
+		}
+
+		if (result === "wrong") {
+			handleWrongAnswer()
+		}
+	}
+
 	return {
-		hearts,
-		percentage,
-		selectedOption,
-		status,
 		currentChallenge,
 		title,
-		selectOption,
-		setHearts,
-		setPercentage,
-		setStatus,
-		setActiveIndex,
+		onContinue,
 	}
 }
