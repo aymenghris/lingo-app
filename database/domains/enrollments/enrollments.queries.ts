@@ -33,10 +33,6 @@ export const addUserNewEnrollment = async (
 		currentChallengeId: firstChallenge.id,
 		isActive: true,
 	})
-
-	console.log(
-		`Successfully added new enrollment for userId: ${userId} and courseId: ${courseId}.`,
-	)
 }
 
 export const getUserEnrollments = async (userId: string) => {
@@ -45,12 +41,7 @@ export const getUserEnrollments = async (userId: string) => {
 		.from(enrollments)
 		.where(eq(enrollments.userId, userId))
 
-	if (!enrolments) {
-		console.log(`No enrollments found for userId: ${userId}.`)
-		return null
-	}
-
-	console.log(`Successfully retrieved enrollments for userId: ${userId}.`)
+	if (!enrolments) return null
 }
 
 export const getUserEnrollment = cache(
@@ -65,16 +56,7 @@ export const getUserEnrollment = cache(
 				),
 			)
 
-		if (!enrolment) {
-			console.log(
-				`No enrollment data found for userId: ${userId} and courseId: ${courseId}.`,
-			)
-			return null
-		}
-
-		console.log(
-			`Successfully retrieved enrollment data for userId: ${userId} and courseId: ${courseId}.`,
-		)
+		if (!enrolment) return null
 
 		return enrolment
 	},
@@ -93,10 +75,6 @@ export const getUserActiveEnrollment = cache(async () => {
 	if (!activeEnrollment)
 		throw new Error(`No active enrollment found for userId: ${userId}.`)
 
-	console.log(
-		`Successfully retrieved active enrollment for userId: ${userId}.`,
-	)
-
 	return activeEnrollment
 })
 
@@ -110,14 +88,7 @@ export const getUserActiveCourseId = async () => {
 			and(eq(enrollments.userId, userId), eq(enrollments.isActive, true)),
 		)
 
-	if (!activeCourse) {
-		console.log(`No active course ID found for userId: ${userId}.`)
-		return null
-	}
-
-	console.log(
-		`Successfully retrieved active course ID for userId: ${userId}.`,
-	)
+	if (!activeCourse) return null
 
 	return activeCourse.courseId
 }
@@ -141,9 +112,6 @@ export const getUserEnrolledCoursesIds = cache(async (userId: string) => {
 		return []
 	}
 
-	console.log(
-		`Successfully retrieved enrolled courseIds for userId: ${userId}.`,
-	)
 	return courses.map((course) => course.courseId)
 })
 
@@ -168,10 +136,6 @@ export const setEnrollmentsInactive = async (userId: string) => {
 		.update(enrollments)
 		.set({ isActive: false })
 		.where(eq(enrollments.userId, userId))
-
-	console.log(
-		`Successfully set enrollments to inactive for userId: ${userId}.`,
-	)
 }
 
 export const updateExistedUserActiveCourse = async (
@@ -193,8 +157,20 @@ export const updateExistedUserActiveCourse = async (
 				eq(enrollments.courseId, courseId),
 			),
 		)
+}
 
-	console.log(
-		`Successfully updated active course for userId: ${userId} to courseId: ${courseId}.`,
-	)
+export const updateCurrentLessonId = async (
+	userId: string,
+	courseId: number,
+	nextLessonId: number,
+) => {
+	await db
+		.update(enrollments)
+		.set({ currentLessonId: nextLessonId })
+		.where(
+			and(
+				eq(enrollments.userId, userId),
+				eq(enrollments.courseId, courseId),
+			),
+		)
 }
