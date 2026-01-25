@@ -1,4 +1,3 @@
-// components/quiz/QuizCard.tsx
 import type { FC, ReactNode } from "react"
 
 interface QuizCardProps {

@@ -9,7 +9,6 @@ export const QuestionBubble: FC<{ question: string }> = ({ question }) => {
 			<Image
 				src={assetsPath.public.mascot}
 				alt="mascot"
-				// Set props to the largest size to ensure aspect ratio is correct
 				width={60}
 				height={60}
 				className="size-10 lg:size-15"
