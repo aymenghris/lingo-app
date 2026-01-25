@@ -1,23 +1,18 @@
+"use client"
+
 import { InfinityIcon, XIcon } from "lucide-react"
 import Image from "next/image"
-import type { FC } from "react"
 import { Progress } from "@/components/ui/progress"
 import { assetsPath } from "@/constants"
 import { cn } from "@/lib/utils"
-import { useExitModal } from "@/stores/use-exit-modal-store"
+import { useExitModalSelector } from "@/stores/use-exit-modal-store"
+import { useQuizInteractionStoreSelector } from "@/stores/use-quiz-interaction-store"
+import { useUserStoreSelector } from "@/stores/use-user-store"
 
-interface HeaderProps {
-	hearts: number
-	percentage: number
-	hasActiveSubscription: boolean
-}
-
-export const Header: FC<HeaderProps> = ({
-	hasActiveSubscription,
-	hearts,
-	percentage,
-}) => {
-	const openModal = useExitModal((state) => state.openModal)
+export const Header = () => {
+	const { openModal } = useExitModalSelector()
+	const { hearts, hasSubscription } = useUserStoreSelector()
+	const { percentage } = useQuizInteractionStoreSelector()
 
 	return (
 		<header
@@ -36,14 +31,14 @@ export const Header: FC<HeaderProps> = ({
 
 			<div className="flex items-center text-rose-600">
 				<Image
-					src={assetsPath.statsBar.heart}
+					src={assetsPath.userStats.heart}
 					width={28}
 					height={28}
 					alt="heart"
 					className="mr-2"
 				/>
 
-				{hasActiveSubscription ? (
+				{hasSubscription ? (
 					<InfinityIcon className="size-full stroke-3" />
 				) : (
 					<span className="font-bold text-lg leading-none">
