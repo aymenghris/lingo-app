@@ -11,6 +11,7 @@ export const challengeOptions = pgTable("challenge_options", {
 	textContent: varchar("text_content").notNull(),
 	imageSrc: varchar("image_src"),
 	audioSrc: varchar("audio_src"),
+	placement: integer("placement").notNull(),
 })
 
 export const challengeOptionsRelation = relations(
