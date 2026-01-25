@@ -38,7 +38,7 @@ export const StatsBar: FC<StatsBarProps> = ({
 			<Link href="/shop">
 				<Button variant="default-outline" className="text-orange-500">
 					<Image
-						src={assetsPath.statsBar.light}
+						src={assetsPath.userStats.light}
 						alt="points"
 						width={28}
 						height={28}
@@ -52,7 +52,7 @@ export const StatsBar: FC<StatsBarProps> = ({
 			<Link href="/shop">
 				<Button variant="default-outline" className="text-rose-500">
 					<Image
-						src={assetsPath.statsBar.heart}
+						src={assetsPath.userStats.heart}
 						alt="hearts"
 						width={22}
 						height={22}

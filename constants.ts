@@ -3,10 +3,11 @@ export const assetsPath = {
 		hero: "/hero.svg",
 		mascot: "/mascot.svg",
 		mascotSad: "/mascot-sad.svg",
+		confettiBall: "/confetti-ball.svg",
 	},
-	statsBar: {
-		heart: "/stats-bar/heart.svg",
-		light: "/stats-bar/light.svg",
+	userStats: {
+		heart: "/user-stats/heart.svg",
+		light: "/user-stats/light.svg",
 	},
 }
 
@@ -34,8 +35,13 @@ export const footerCourses = [
 ]
 
 export const sidebarItems = [
-	{ iconSrc: "/icons/house.svg", title: "learn" },
-	{ iconSrc: "/icons/medal.svg", title: "leaderboard" },
-	{ iconSrc: "/icons/bullseye.svg", title: "quests" },
-	{ iconSrc: "/icons/shop.svg", title: "shop" },
+	{ iconSrc: "/sidebar/house.svg", title: "learn" },
+	{ iconSrc: "/sidebar/medal.svg", title: "leaderboard" },
+	{ iconSrc: "/sidebar/bullseye.svg", title: "quests" },
+	{ iconSrc: "/sidebar/shop.svg", title: "shop" },
 ]
+
+export const soundsPath = {
+	correct: "/sounds/correct.mp3",
+	incorrect: "/sounds/incorrect.mp3",
+}
