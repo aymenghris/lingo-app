@@ -1,5 +1,5 @@
-import { lessons } from "@database/schemas"
-import { and, eq } from "drizzle-orm"
+import { challengeOptions, challenges, lessons } from "@database/schemas"
+import { and, asc, eq } from "drizzle-orm"
 import { db } from "@/database/drizzle"
 
 export const getLessons = async (unitId: number) => {
@@ -25,8 +25,11 @@ export const getLessonContent = async (lessonId: number) => {
 		where: eq(lessons.id, lessonId),
 		with: {
 			challenges: {
+				orderBy: asc(challenges.placement),
 				with: {
-					challengeOptions: true,
+					options: {
+						orderBy: asc(challengeOptions.placement),
+					},
 				},
 			},
 		},
