@@ -1,8 +1,10 @@
 import type { ChallengeStatus } from "@/types/challenges.types"
+import type { QuizState } from "@/types/quiz-types"
 
 export interface FooterTypes {
-	onCheckSolution: () => void
-	status: ChallengeStatus | "completed"
 	lessonId?: number
-	disabled?: boolean
+	onCheckSolution: () => void
+	challengeStatus: ChallengeStatus
+	quizState: QuizState
+	disabled: boolean
 }

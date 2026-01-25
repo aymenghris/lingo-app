@@ -3,15 +3,14 @@ import type { FC } from "react"
 import { useMedia } from "react-use"
 import { Button } from "@/components/ui/button"
 
-type PracticeButtonProps = Pick<FooterTypes, "lessonId" | "status">
+type PracticeButtonProps = Pick<FooterTypes, "lessonId" | "quizState">
 
 export const PracticeButton: FC<PracticeButtonProps> = ({
 	lessonId,
-	status,
+	quizState,
 }) => {
 	const isMobile = useMedia("(max-width: 1024px)")
-
-	if (status !== "completed") return null
+	if (quizState !== "completed") return null
 
 	return (
 		<Button

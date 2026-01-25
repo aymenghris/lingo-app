@@ -1,3 +1,4 @@
+import { getCheckButtonConfig } from "@lesson/components/footer/buttons/utils/get-check-button-config"
 import type { FooterTypes } from "@lesson/components/footer/utils/footer.types"
 import type { FC } from "react"
 import { useKey, useMedia } from "react-use"
@@ -5,23 +6,20 @@ import { Button } from "@/components/ui/button"
 
 type CheckButtonProps = Pick<
 	FooterTypes,
-	"onCheckSolution" | "status" | "disabled"
+	"onCheckSolution" | "challengeStatus" | "quizState" | "disabled"
 >
 
 export const CheckButton: FC<CheckButtonProps> = ({
 	onCheckSolution,
-	status,
+	challengeStatus,
+	quizState,
 	disabled,
 }) => {
-	const isMobile = useMedia("(max-width: 1024px)")
-	useKey("Enter", onCheckSolution, {}, [onCheckSolution])
+	const { text, variant } = getCheckButtonConfig(challengeStatus, quizState)
 
-	const buttonContent = {
-		none: "check",
-		correct: "next",
-		wrong: "retry",
-		completed: "continue",
-	}
+	const isMobile = useMedia("(max-width: 1024px)")
+
+	useKey("Enter", onCheckSolution, {}, [onCheckSolution])
 
 	return (
 		<Button
@@ -29,9 +27,9 @@ export const CheckButton: FC<CheckButtonProps> = ({
 			className="ml-auto"
 			onClick={onCheckSolution}
 			size={isMobile ? "sm" : "lg"}
-			variant={status === "wrong" ? "danger" : "secondary"}
+			variant={variant}
 		>
-			{buttonContent[status]}
+			{text}
 		</Button>
 	)
 }

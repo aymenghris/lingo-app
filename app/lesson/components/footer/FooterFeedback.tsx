@@ -3,10 +3,13 @@ import { CheckCircle, XCircle } from "lucide-react"
 import type { FC } from "react"
 import { cn } from "@/lib/utils"
 
-type FooterFeedbackProps = Pick<FooterTypes, "status">
+type FooterFeedbackProps = Pick<FooterTypes, "challengeStatus">
 
-export const FooterFeedback: FC<FooterFeedbackProps> = ({ status }) => {
-	if (status !== "correct" && status !== "wrong") return
+export const FooterFeedback: FC<FooterFeedbackProps> = ({
+	challengeStatus,
+}) => {
+	if (challengeStatus !== "correct" && challengeStatus !== "wrong")
+		return null
 
 	const feedbackMap = {
 		correct: {
@@ -21,17 +24,17 @@ export const FooterFeedback: FC<FooterFeedbackProps> = ({ status }) => {
 		},
 	}
 
-	const FeedbackIcon = feedbackMap[status].icon
+	const FeedbackIcon = feedbackMap[challengeStatus].icon
 
 	return (
 		<div
 			className={cn(
 				"flex items-center font-bold text-base lg:text-2xl",
-				feedbackMap[status].styles,
+				feedbackMap[challengeStatus].styles,
 			)}
 		>
 			<FeedbackIcon className="mr-2 size-6 lg:h-10 lg:w-10" />
-			{feedbackMap[status].feedback}
+			{feedbackMap[challengeStatus].feedback}
 		</div>
 	)
 }
