@@ -1,12 +1,53 @@
-import { stats } from "@database/schemas"
+import { usersStats } from "@database/schemas"
 import { eq } from "drizzle-orm"
 import { cache } from "react"
 import { db } from "@/database/drizzle"
 import { getUserId } from "@/utils/clerk"
 
-export const getUsersStats = cache(async () => {
+const DEFAULT_HEARTS = 5
+
+export const getUserStats = cache(async () => {
 	const userId = await getUserId()
-	const [data] = await db.select().from(stats).where(eq(stats.userId, userId))
+
+	const [data] = await db
+		.select()
+		.from(usersStats)
+		.where(eq(usersStats.userId, userId))
 
 	return data
 })
+
+export const incrementHearts = async (userId: string, prevHearts: number) => {
+	await db
+		.update(usersStats)
+		.set({ hearts: Math.min(prevHearts + 1, DEFAULT_HEARTS) })
+		.where(eq(usersStats.userId, userId))
+}
+
+export const decrementHearts = async (userId: string, prevHearts: number) => {
+	await db
+		.update(usersStats)
+		.set({ hearts: Math.max(prevHearts - 1, 0) })
+		.where(eq(usersStats.userId, userId))
+}
+
+export const incrementPoints = async (userId: string, prevPoints: number) => {
+	await db
+		.update(usersStats)
+		.set({ points: prevPoints + 10 })
+		.where(eq(usersStats.userId, userId))
+}
+
+export const incrementHeartsAndPoints = async (
+	userId: string,
+	prevHearts: number,
+	prevPoints: number,
+) => {
+	await db
+		.update(usersStats)
+		.set({
+			hearts: Math.min(prevHearts + 1, DEFAULT_HEARTS),
+			points: prevPoints + 10,
+		})
+		.where(eq(usersStats.userId, userId))
+}
