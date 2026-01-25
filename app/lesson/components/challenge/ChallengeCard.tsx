@@ -1,57 +1,64 @@
-import {
-	CardContent,
-	CardImage,
-	getCardStyles,
-} from "@lesson/components/challenge/card"
+import { CardContent } from "@lesson/components/challenge/CardContent"
+import { getCardStyles } from "@lesson/components/challenge/utils/challenge-card.styles"
+import type { ChallengeCardTypes } from "@lesson/components/challenge/utils/challenge-card.types"
+import Image from "next/image"
 import type { FC } from "react"
 import { useChallengeCard } from "@/hooks/useChallengeCard"
+import { useQuizInteractionStoreSelector } from "@/stores/use-quiz-interaction-store"
 import type { ChallengeOption } from "@/types/challenge-options.types"
-import type { ChallengeStatus, ChallengeTypes } from "@/types/challenges.types"
 
-export type ChallengeCardProps = {
+type ChallengeCardProps = {
 	option: ChallengeOption
-	shortcut: string
-	onClick: () => void
-	type: ChallengeTypes
-	selected?: boolean
-	status?: ChallengeStatus
-	disabled?: boolean
-}
+} & Pick<ChallengeCardTypes, "challengeType">
 
 export const ChallengeCard: FC<ChallengeCardProps> = ({
 	option,
-	shortcut,
-	onClick,
-	type,
-	selected,
-	status,
-	disabled,
+	challengeType,
 }) => {
+	const { selectedOptionId, pending, selectOption, challengeStatus } =
+		useQuizInteractionStoreSelector()
+
+	const isOptionSelected = selectedOptionId === option.id
+
+	const onOptionClick = () => selectOption(option.id)
+
 	const { audioElement, handleClick } = useChallengeCard({
 		audioSrc: option.audioSrc,
-		shortcut,
-		onClick,
-		disabled,
+		placement: option.placement,
+		onOptionClick,
+		disabled: pending,
 	})
 
 	return (
 		<button
 			type="button"
 			onClick={handleClick}
-			className={getCardStyles({ selected, status, disabled, type })}
+			className={getCardStyles({
+				isOptionSelected,
+				challengeStatus,
+				disabled: pending,
+				challengeType,
+			})}
 		>
 			{audioElement}
 
 			{option.imageSrc && (
-				<CardImage src={option.imageSrc} alt={option.textContent} />
+				<div className="mb-4">
+					<Image
+						src={option.imageSrc}
+						alt={option.textContent}
+						width={150}
+						height={150}
+					/>
+				</div>
 			)}
 
 			<CardContent
-				text={option.textContent}
-				shortcut={shortcut}
-				type={type}
-				selected={selected}
-				status={status}
+				textContent={option.textContent}
+				shortcut={option.placement}
+				isOptionSelected={isOptionSelected}
+				challengeType={challengeType}
+				challengeStatus={challengeStatus}
 			/>
 		</button>
 	)
