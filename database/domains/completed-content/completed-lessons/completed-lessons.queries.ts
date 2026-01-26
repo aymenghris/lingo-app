@@ -17,6 +17,23 @@ export const getCompletedLessonIds = cache(async () => {
 	return new Set(rows.map((row) => row.lessonId))
 })
 
+export const getCompletedLesson = async (lessonId: number) => {
+	const userId = await getUserId()
+
+	const [lesson] = await db
+		.select()
+		.from(completedLessons)
+		.where(
+			and(
+				eq(completedLessons.userId, userId),
+				eq(completedLessons.lessonId, lessonId),
+			),
+		)
+	if (!lesson) return undefined
+
+	return lesson
+}
+
 export const insertCompletedLesson = async (
 	userId: string,
 	lessonId: number,
@@ -41,4 +58,8 @@ export const getNextLesson = async (lessonId: number) => {
 		.limit(1)
 
 	return nextLesson
+}
+
+export const isUserCompletedLesson = async (lessonId: number) => {
+	return !!(await getCompletedLesson(lessonId))
 }
