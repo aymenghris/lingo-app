@@ -1,16 +1,10 @@
-import {
-	getCompletedChallengesIds,
-	getCompletedLessonIds,
-	getLessonContent,
-} from "@database/queries"
+import { getCompletedChallengesIds, getLessonContent } from "@database/queries"
 
-export const getLessonWithProgress = async (lessonId: number) => {
-	const [lesson, completedLessonsIds] = await Promise.all([
-		getLessonContent(lessonId),
-		getCompletedLessonIds(),
-	])
-
-	const isLessonCompleted = completedLessonsIds.has(lessonId)
+export const getLessonWithProgress = async (
+	lessonId: number,
+	isLessonCompleted: boolean,
+) => {
+	const lesson = await getLessonContent(lessonId)
 
 	// If the lesson is completed → all challenges are considered completed
 	if (isLessonCompleted) {
