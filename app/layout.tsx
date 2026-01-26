@@ -3,8 +3,7 @@ import "./globals.css"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Nunito } from "next/font/google"
 import type { FC, ReactNode } from "react"
-import { ExitModal } from "@/components/modals/ExitModal"
-import { Toaster } from "@/components/ui/sonner"
+import { Modals } from "@/components/modals/Modals"
 
 const nunito = Nunito({ subsets: ["latin"] })
 
@@ -22,8 +21,7 @@ const RootLayout: FC<RootLayoutProps> = ({ children }) => {
 			<html lang="en" className={nunito.className}>
 				<body>
 					{children}
-					<Toaster />
-					<ExitModal />
+					<Modals />
 				</body>
 			</html>
 		</ClerkProvider>
