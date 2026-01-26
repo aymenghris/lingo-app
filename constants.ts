@@ -2,12 +2,15 @@ export const assetsPath = {
 	public: {
 		hero: "/hero.svg",
 		mascot: "/mascot.svg",
-		mascotSad: "/mascot-sad.svg",
 		confettiBall: "/confetti-ball.svg",
 	},
 	userStats: {
 		heart: "/user-stats/heart.svg",
 		light: "/user-stats/light.svg",
+	},
+	modals: {
+		mascotSad: "/modals/mascot-sad.svg",
+		mascotBad: "/modals/mascot-bad.svg",
 	},
 }
 
