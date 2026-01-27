@@ -1,13 +1,27 @@
+import { useEffect } from "react"
 import { useChallengeInteraction } from "@/hooks/useChallengeInteraction"
+import { useHeartsModal, usePracticeModal } from "@/stores/use-modal-store"
 import { useQuizInteractionStoreSelector } from "@/stores/use-quiz-interaction-store"
 import { useQuizSessionStoreSelector } from "@/stores/use-quiz-session-store"
+import { useUserStoreSelector } from "@/stores/use-user-store"
 
 export const useQuiz = () => {
-	const { getCurrentChallenge, nextChallenge } = useQuizSessionStoreSelector()
-	const currentChallenge = getCurrentChallenge()
+	const { currentChallenge, nextChallenge, quizMode } =
+		useQuizSessionStoreSelector()
 
 	const { selectedOptionId, challengeStatus, resetInteraction } =
 		useQuizInteractionStoreSelector()
+
+	const { hearts } = useUserStoreSelector()
+
+	const { openModal: openHeartModal } = useHeartsModal()
+	const { openModal: openPracticeModal } = usePracticeModal()
+
+	useEffect(() => {
+		if (quizMode === "practice") {
+			openPracticeModal()
+		}
+	}, [quizMode, openPracticeModal])
 
 	const { checkAnswer, handleCorrectAnswer, handleWrongAnswer } =
 		useChallengeInteraction()
@@ -19,6 +33,12 @@ export const useQuiz = () => {
 
 	const onContinue = () => {
 		if (!selectedOptionId) return
+
+		if (hearts === 0 && quizMode !== "practice") {
+			openHeartModal()
+			resetInteraction()
+			return
+		}
 
 		if (challengeStatus === "correct") {
 			// User succeeded, clicked continue to go next
