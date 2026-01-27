@@ -11,13 +11,10 @@ const LessonPage = async () => {
 		redirect("/courses")
 	}
 	const { currentLessonId } = userActiveEnrolment
-	const lesson = await getLessonWithProgress(currentLessonId)
+	const lesson = await getLessonWithProgress(currentLessonId, false)
 	const { hearts } = await getUserStats()
 
-	// If it's a practice
-	const initialLessonPercentage = lesson.completed
-		? 0
-		: lessonProgressPercentage(lesson.challenges)
+	const initialLessonPercentage = lessonProgressPercentage(lesson.challenges)
 
 	return (
 		<QuizOrchestrator
@@ -25,7 +22,7 @@ const LessonPage = async () => {
 			initialChallenges={lesson.challenges}
 			initialHearts={hearts}
 			initialPercentage={initialLessonPercentage}
-			initialQuizMode={lesson.completed ? "practice" : "learn"}
+			initialQuizMode="learn"
 		/>
 	)
 }
