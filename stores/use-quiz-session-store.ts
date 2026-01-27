@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { devtools } from "zustand/middleware"
 import { useShallow } from "zustand/react/shallow"
 import type { ChallengeWithOptions } from "@/types/challenges.types"
 import type { QuizMode, QuizState } from "@/types/quiz-types"
@@ -9,6 +10,7 @@ interface QuizSessionStore {
 	activeIndex: number
 	quizMode: QuizMode
 	quizState: QuizState
+	isInitialized: boolean
 
 	initSession: (
 		lessonId: number,
@@ -17,45 +19,45 @@ interface QuizSessionStore {
 	) => void
 
 	nextChallenge: () => void
-
-	getCurrentChallenge: () => ChallengeWithOptions
 }
 
-const useQuizSessionStore = create<QuizSessionStore>((set, get) => ({
-	lessonId: undefined,
-	challenges: [],
-	activeIndex: 0,
-	quizMode: "learn",
-	quizState: "in-progress",
+const useQuizSessionStore = create<QuizSessionStore>()(
+	devtools(
+		(set, get) => ({
+			lessonId: undefined,
+			challenges: [],
+			activeIndex: 0,
+			quizMode: "learn",
+			quizState: "in-progress",
+			isInitialized: false,
 
-	initSession: (lessonId, challenges, quizMode) => {
-		// Find the first uncompleted challenge
-		const uncompleted = challenges.findIndex((c) => !c.completed)
+			initSession: (lessonId, challenges, quizMode) => {
+				// Find the first uncompleted challenge
+				const uncompleted = challenges.findIndex((c) => !c.completed)
 
-		set({
-			lessonId,
-			challenges,
-			activeIndex: uncompleted === -1 ? 0 : uncompleted,
-			quizMode,
-		})
-	},
+				set({
+					lessonId,
+					challenges,
+					activeIndex: uncompleted === -1 ? 0 : uncompleted,
+					quizMode,
+					isInitialized: true,
+				})
+			},
 
-	nextChallenge: () => {
-		const { activeIndex, challenges } = get()
+			nextChallenge: () => {
+				const { activeIndex, challenges } = get()
 
-		if (activeIndex < challenges.length - 1) {
-			set({ activeIndex: activeIndex + 1 })
-		} else {
-			// No more challenges - mark the quiz as completed
-			set({ quizState: "completed" })
-		}
-	},
-
-	getCurrentChallenge: () => {
-		const { activeIndex, challenges } = get()
-		return challenges[activeIndex]
-	},
-}))
+				if (activeIndex < challenges.length - 1) {
+					set({ activeIndex: activeIndex + 1 })
+				} else {
+					// No more challenges - mark the quiz as completed
+					set({ quizState: "completed" })
+				}
+			},
+		}),
+		{ name: "quiz-session-store" },
+	),
+)
 
 const useQuizSessionStoreSelector = () => {
 	return useQuizSessionStore(
@@ -70,9 +72,8 @@ const useQuizSessionStoreSelector = () => {
 
 			initSession: state.initSession,
 			nextChallenge: state.nextChallenge,
-			getCurrentChallenge: state.getCurrentChallenge,
 		})),
 	)
 }
 
-export { useQuizSessionStoreSelector }
+export { useQuizSessionStore, useQuizSessionStoreSelector }
