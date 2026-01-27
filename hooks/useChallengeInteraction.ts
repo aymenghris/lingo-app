@@ -31,17 +31,14 @@ export const useChallengeInteraction = () => {
 	}
 
 	const handleCorrectAnswer = () => {
-		startTransition(() => {
-			processCorrectAnswer(currentChallenge.id)
-				.then(() => {
-					sfx.correct.play()
-					setChallengeStatus("correct")
+		sfx.correct.play()
+		setChallengeStatus("correct")
+		incrementPercentage(100 / challenges.length)
 
-					if (quizMode === "practice") {
-						incrementHearts()
-					} else {
-						incrementPercentage(100 / challenges.length)
-					}
+		startTransition(() => {
+			processCorrectAnswer(quizMode, lessonId, currentChallenge.id)
+				.then(() => {
+					if (quizMode === "practice") incrementHearts()
 				})
 				.catch(() =>
 					toast.error("Something went wrong. Please try again."),
