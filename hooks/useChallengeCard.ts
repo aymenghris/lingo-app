@@ -1,13 +1,19 @@
-// hooks/useChallengeCard.ts
 import { useCallback } from "react"
 import { useAudio, useKey } from "react-use"
 
 interface UseChallengeCardProps {
-	audioSrc?: string | null
+	audioSrc: string | null
 	placement: number
 	onOptionClick: () => void
-	disabled?: boolean
+	disabled: boolean
 }
+
+/**
+ * Minimal Base64-encoded silent WAV.
+ * Used as a dummy source for <audio> elements to ensure the 'src' is valid
+ */
+const SILENT_AUDIO =
+	"data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA="
 
 export const useChallengeCard = ({
 	audioSrc,
@@ -15,7 +21,9 @@ export const useChallengeCard = ({
 	onOptionClick,
 	disabled,
 }: UseChallengeCardProps) => {
-	const [audioElement, , controls] = useAudio({ src: audioSrc || "" })
+	const [audioElement, , controls] = useAudio({
+		src: audioSrc || SILENT_AUDIO,
+	})
 
 	const handleClick = useCallback(() => {
 		if (disabled) return
