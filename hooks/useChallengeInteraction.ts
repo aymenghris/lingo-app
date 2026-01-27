@@ -10,7 +10,7 @@ import { sfx } from "@/utils/play-quiz-sounds"
 export const useChallengeInteraction = () => {
 	const [_, startTransition] = useSyncedTransition()
 
-	const { currentChallenge, challenges, quizMode } =
+	const { lessonId, currentChallenge, challenges, quizMode } =
 		useQuizSessionStoreSelector()
 
 	const { selectedOptionId, incrementPercentage, setChallengeStatus } =
@@ -47,11 +47,16 @@ export const useChallengeInteraction = () => {
 	}
 
 	const handleWrongAnswer = () => {
+		sfx.incorrect.play()
+		setChallengeStatus("wrong")
+
+		if (quizMode === "practice") {
+			return
+		}
+
 		startTransition(() => {
-			processWrongAnswer(quizMode, currentChallenge.lessonId)
+			processWrongAnswer(currentChallenge.lessonId)
 				.then(() => {
-					sfx.incorrect.play()
-					setChallengeStatus("wrong")
 					decrementHearts()
 				})
 				.catch(() =>
