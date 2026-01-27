@@ -65,4 +65,4 @@ const useUserStoreSelector = () => {
 	)
 }
 
-export { useUserStoreSelector }
+export { useUserStore, useUserStoreSelector }

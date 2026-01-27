@@ -1,11 +1,10 @@
 import type { QuizType } from "@lesson/components/quiz/utils/quiz.type"
-import { useQuizInteractionStoreSelector } from "@/stores/use-quiz-interaction-store"
-import { useQuizSessionStoreSelector } from "@/stores/use-quiz-session-store"
-import { useUserStoreSelector } from "@/stores/use-user-store"
+import { useRef } from "react"
+import { useQuizInteractionStore } from "@/stores/use-quiz-interaction-store"
+import { useQuizSessionStore } from "@/stores/use-quiz-session-store"
+import { useUserStore } from "@/stores/use-user-store"
 
 type InitQuizStore = QuizType
-
-import { useRef } from "react"
 
 export const useInitQuizStores = ({
 	initialLessonId,
@@ -16,17 +15,21 @@ export const useInitQuizStores = ({
 }: InitQuizStore) => {
 	const initialized = useRef(false)
 
-	const { initHearts } = useUserStoreSelector()
-	const { initPercentage } = useQuizInteractionStoreSelector()
-	const { initSession } = useQuizSessionStoreSelector()
-
+	// Run once, synchronously, before any subscription
 	if (!initialized.current) {
-		initHearts(initialHearts)
+		// .getState() = direct access, no React involvement
+		useUserStore.getState().initHearts(initialHearts)
+		useQuizInteractionStore.getState().initPercentage(initialPercentage)
 
-		initPercentage(initialPercentage)
+		initialized.current = true
 
-		initSession(initialLessonId, initialChallenges, initialQuizMode)
+		useQuizSessionStore
+			.getState()
+			.initSession(initialLessonId, initialChallenges, initialQuizMode)
 
 		initialized.current = true
 	}
+
+	// After init, subscribe to verify
+	return useQuizSessionStore((state) => state.isInitialized)
 }
