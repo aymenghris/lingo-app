@@ -1,17 +1,15 @@
 import * as schema from "@database/schemas"
 import { db } from "@/database/drizzle"
-import type {
-	Challenge,
-	ChallengeOptions,
-	Lesson,
-	Unit,
-} from "@/scripts/seeds/utils/types"
+import type { ChallengeOption } from "@/types/challenge-options.types"
+import type { Challenge } from "@/types/challenges.types"
+import type { Lesson } from "@/types/lessons.types"
+import type { Unit } from "@/types/unit.types"
 
 export const insertLanguageContent = async (
 	units?: Unit[],
 	lessons?: Lesson[],
 	challenges?: Challenge[],
-	challengeOptions?: ChallengeOptions[],
+	challengeOptions?: ChallengeOption[],
 ) => {
 	if (units) await insertUnits(units)
 	if (lessons) await insertLessons(lessons)
@@ -69,7 +67,7 @@ const insertChallenges = async (challenges: Challenge[]) => {
 	}
 }
 
-const insertChallengeOptions = async (challengeOptions: ChallengeOptions[]) => {
+const insertChallengeOptions = async (challengeOptions: ChallengeOption[]) => {
 	try {
 		await db.insert(schema.challengeOptions).values(
 			challengeOptions.map((option) => ({
@@ -79,6 +77,7 @@ const insertChallengeOptions = async (challengeOptions: ChallengeOptions[]) => {
 				textContent: option.textContent,
 				imageSrc: option.imageSrc,
 				audioSrc: option.audioSrc,
+				placement: option.placement,
 			})),
 		)
 		console.log("Challenge options inserted successfully")
