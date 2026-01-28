@@ -5,12 +5,12 @@ import Image from "next/image"
 import { Progress } from "@/components/ui/progress"
 import { assetsPath } from "@/constants"
 import { cn } from "@/lib/utils"
-import { useExitModalSelector } from "@/stores/use-exit-modal-store"
+import { useExitModal } from "@/stores/use-modal-store"
 import { useQuizInteractionStoreSelector } from "@/stores/use-quiz-interaction-store"
 import { useUserStoreSelector } from "@/stores/use-user-store"
 
 export const Header = () => {
-	const { openModal } = useExitModalSelector()
+	const { openModal } = useExitModal()
 	const { hearts, hasSubscription } = useUserStoreSelector()
 	const { percentage } = useQuizInteractionStoreSelector()
 
