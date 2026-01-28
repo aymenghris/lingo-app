@@ -35,7 +35,7 @@ export const ResultCard: FC<ResultCardProps> = ({ value, variant }) => {
 	return (
 		<div
 			className={cn(
-				"rounded-2xl border-2 w-full",
+				"w-full rounded-2xl border-2",
 				styles.bgColor,
 				styles.borderColor,
 			)}

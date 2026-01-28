@@ -53,7 +53,7 @@ export const FinishScreen = () => {
 				great job! <br /> you've completed the lesson
 			</h1>
 
-			<div className="flex items-center justify-center gap-x-4 w-full">
+			<div className="flex w-full items-center justify-center gap-x-4">
 				<ResultCard
 					variant="points"
 					value={challenges.length * XP_PER_CHALLENGE}
