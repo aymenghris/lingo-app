@@ -10,9 +10,10 @@ import { useQuizSessionStoreSelector } from "@/stores/use-quiz-session-store"
 type QuizOrchestratorProps = QuizType
 
 export const QuizOrchestrator: FC<QuizOrchestratorProps> = (props) => {
-	useInitQuizStores({ ...props })
-
+	const isReady = useInitQuizStores({ ...props })
 	const { quizState } = useQuizSessionStoreSelector()
+
+	if (!isReady) return null
 
 	if (quizState === "completed") {
 		return <FinishScreen />
