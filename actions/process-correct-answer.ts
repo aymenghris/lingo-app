@@ -1,14 +1,13 @@
 "use server"
 
 import {
-	getChallenge,
 	getUserStats,
 	incrementHeartsAndPoints,
 	incrementPoints,
 	insertCompletedChallenge,
-	isUserCompletedChallenge,
 } from "@database/queries"
 import { revalidatePaths } from "@/actions/utils"
+import type { QuizMode } from "@/types/quiz-types"
 import { getUserId } from "@/utils/clerk"
 
 const PATHS_TO_REVALIDATE = [
@@ -18,14 +17,15 @@ const PATHS_TO_REVALIDATE = [
 	"/leaderboard",
 ] as const
 
-export const processCorrectAnswer = async (challengeId: number) => {
+export const processCorrectAnswer = async (
+	quizMode: QuizMode,
+	lessonId: number | undefined,
+	challengeId: number,
+) => {
 	const userId = await getUserId()
-
 	const userStats = await getUserStats()
-	const isChallengeCompleted = await isUserCompletedChallenge(challengeId)
-	const challenge = await getChallenge(challengeId)
 
-	if (isChallengeCompleted) {
+	if (quizMode === "practice") {
 		await incrementHeartsAndPoints(
 			userId,
 			userStats.hearts,
@@ -36,5 +36,5 @@ export const processCorrectAnswer = async (challengeId: number) => {
 		await incrementPoints(userId, userStats.points)
 	}
 
-	revalidatePaths([...PATHS_TO_REVALIDATE, `/lesson/${challenge.lessonId}`])
+	revalidatePaths([...PATHS_TO_REVALIDATE, `/lesson/${lessonId}`])
 }
