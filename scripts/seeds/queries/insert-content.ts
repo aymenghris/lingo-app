@@ -1,9 +1,6 @@
 import * as schema from "@database/schemas"
+import type { Challenge, ChallengeOption, Lesson, Unit } from "@seeds/types"
 import { db } from "@/database/drizzle"
-import type { ChallengeOption } from "@/types/challenge-options.types"
-import type { Challenge } from "@/types/challenges.types"
-import type { Lesson } from "@/types/lessons.types"
-import type { Unit } from "@/types/unit.types"
 
 export const insertLanguageContent = async (
 	units?: Unit[],
@@ -21,7 +18,6 @@ const insertUnits = async (units: Unit[]) => {
 	try {
 		await db.insert(schema.units).values(
 			units.map((unit) => ({
-				id: unit.id,
 				title: unit.title,
 				description: unit.description,
 				courseId: unit.courseId,
@@ -38,7 +34,6 @@ const insertLessons = async (lessons: Lesson[]) => {
 	try {
 		await db.insert(schema.lessons).values(
 			lessons.map((lesson) => ({
-				id: lesson.id,
 				title: lesson.title,
 				unitId: lesson.unitId,
 				placement: lesson.placement,
@@ -54,7 +49,6 @@ const insertChallenges = async (challenges: Challenge[]) => {
 	try {
 		await db.insert(schema.challenges).values(
 			challenges.map((challenge) => ({
-				id: challenge.id,
 				lessonId: challenge.lessonId,
 				type: challenge.type,
 				question: challenge.question,
@@ -71,7 +65,6 @@ const insertChallengeOptions = async (challengeOptions: ChallengeOption[]) => {
 	try {
 		await db.insert(schema.challengeOptions).values(
 			challengeOptions.map((option) => ({
-				id: option.id,
 				challengeId: option.challengeId,
 				isCorrect: option.isCorrect,
 				textContent: option.textContent,
