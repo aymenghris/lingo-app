@@ -13,14 +13,14 @@ type BaseItemDefinition = {
 export const ITEM_DEFINITIONS = {
 	man: {
 		assetKey: "man",
-		category: "character",
+		category: "characters",
 	},
 	woman: {
 		assetKey: "woman",
-		category: "character",
+		category: "characters",
 	},
 	robot: {
 		assetKey: "robot",
-		category: "character",
+		category: "characters",
 	},
 } as const satisfies Partial<Record<Words, BaseItemDefinition>>
