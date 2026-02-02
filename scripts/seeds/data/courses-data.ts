@@ -1,34 +1,9 @@
-import type { Course } from "@seeds/utils/types"
+import { createCourse } from "@seeds/utils/create-content"
 
-export const coursesData: Course[] = [
-	{
-		id: 6,
-		title: "spanish",
-		code: "es",
-		placement: 1,
-	},
-	{
-		id: 1,
-		title: "french",
-		code: "fr",
-		placement: 2,
-	},
-	{
-		id: 8,
-		title: "arabic",
-		code: "dz",
-		placement: 3,
-	},
-	{
-		id: 3,
-		title: "italian",
-		code: "it",
-		placement: 4,
-	},
-	{
-		id: 4,
-		title: "japanese",
-		code: "jp",
-		placement: 5,
-	},
+export const coursesData = [
+	createCourse("es", "spanish", 1),
+	createCourse("fr", "french", 2),
+	createCourse("dz", "arabic", 3),
+	createCourse("it", "italian", 4),
+	createCourse("jp", "japanese", 5),
 ]
