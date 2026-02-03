@@ -1,4 +1,4 @@
-import { challenges, courses, lessons, units, users } from "@database/schemas"
+import { courses, lessons, users } from "@database/schemas"
 import { relations } from "drizzle-orm"
 import {
 	boolean,
@@ -18,15 +18,9 @@ export const enrollments = pgTable(
 		courseId: integer("course_id")
 			.notNull()
 			.references(() => courses.id, { onDelete: "cascade" }),
-		currentUnitId: integer("current_unit_id")
-			.notNull()
-			.references(() => units.id),
 		currentLessonId: integer("current_lesson_id")
 			.notNull()
 			.references(() => lessons.id),
-		currentChallengeId: integer("current_challenge_id")
-			.notNull()
-			.references(() => challenges.id),
 		isActive: boolean("is_active").notNull(),
 		enrollmentDate: timestamp("enrollment_date").defaultNow(),
 	},
@@ -42,16 +36,8 @@ export const enrollmentRelation = relations(enrollments, ({ one }) => ({
 		fields: [enrollments.courseId],
 		references: [courses.id],
 	}),
-	unit: one(units, {
-		fields: [enrollments.currentUnitId],
-		references: [units.id],
-	}),
 	lesson: one(lessons, {
 		fields: [enrollments.currentLessonId],
 		references: [lessons.id],
-	}),
-	challenge: one(challenges, {
-		fields: [enrollments.currentChallengeId],
-		references: [challenges.id],
 	}),
 }))

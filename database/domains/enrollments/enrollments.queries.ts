@@ -1,9 +1,4 @@
-import {
-	getCourseById,
-	getFirstChallenge,
-	getFirstLesson,
-	getFirstUnit,
-} from "@database/queries"
+import { getCourseById, getFirstLesson, getFirstUnit } from "@database/queries"
 import { enrollments } from "@database/schemas"
 import { and, eq } from "drizzle-orm"
 import { cache } from "react"
@@ -23,14 +18,11 @@ export const addUserNewEnrollment = async (
 
 	const firstUnit = await getFirstUnit(courseId)
 	const firstLesson = await getFirstLesson(firstUnit.id)
-	const firstChallenge = await getFirstChallenge(firstLesson.id)
 
 	await db.insert(enrollments).values({
 		userId: userId,
 		courseId: courseId,
-		currentUnitId: firstUnit.id,
 		currentLessonId: firstLesson.id,
-		currentChallengeId: firstChallenge.id,
 		isActive: true,
 	})
 }
