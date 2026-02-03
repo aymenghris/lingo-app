@@ -1,15 +1,16 @@
-import type { challengeOptions, challenges } from "@database/schemas"
+import type { challenges } from "@database/schemas"
+import type { ChallengeOption } from "@/types/challenge-options.types"
 
 export type Challenge = typeof challenges.$inferSelect
 
-export type ChallengeWithCompletedState = typeof challenges.$inferSelect & {
+export type ChallengeWithCompletedState = Challenge & {
 	completed: boolean
 }
 
 export type ChallengeWithOptions = ChallengeWithCompletedState & {
-	options: (typeof challengeOptions.$inferSelect)[]
+	options: ChallengeOption[]
 }
 
 export type ChallengeStatus = "correct" | "wrong" | "none"
 
-export type ChallengeTypes = typeof challenges.$inferSelect.type
+export type ChallengeTypes = Challenge["type"]
