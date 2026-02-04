@@ -6,6 +6,10 @@ import { getUserId } from "@/utils/clerk"
 
 const DEFAULT_HEARTS = 5
 
+export const createUserStats = async (userId: string) => {
+	await db.insert(usersStats).values({ userId })
+}
+
 export const getUserStats = cache(async () => {
 	const userId = await getUserId()
 
@@ -16,13 +20,6 @@ export const getUserStats = cache(async () => {
 
 	return data
 })
-
-export const incrementHearts = async (userId: string, prevHearts: number) => {
-	await db
-		.update(usersStats)
-		.set({ hearts: Math.min(prevHearts + 1, DEFAULT_HEARTS) })
-		.where(eq(usersStats.userId, userId))
-}
 
 export const decrementHearts = async (userId: string, prevHearts: number) => {
 	await db

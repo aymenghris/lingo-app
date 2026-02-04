@@ -1,5 +1,5 @@
 import type { WebhookEvent } from "@clerk/nextjs/server"
-import { deleteUser, upsertUser } from "@database/queries"
+import { createUserStats, deleteUser, upsertUser } from "@database/queries"
 import { headers } from "next/headers"
 import { Webhook } from "svix"
 
@@ -67,6 +67,10 @@ export const POST = async (req: Request) => {
 		}
 
 		await upsertUser(userValues)
+
+		if (eventType === "user.created") {
+			await createUserStats(id)
+		}
 
 		return new Response("User upserted successfully", { status: 200 })
 	}
