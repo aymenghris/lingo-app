@@ -11,7 +11,7 @@ interface ResultCardProps {
 const VARIANT_CONFIG = {
 	points: {
 		label: "Total XP",
-		icon: assetsPath.userStats.light,
+		icon: assetsPath.icons.light,
 		styles: {
 			borderColor: "border-orange-400",
 			bgColor: "bg-orange-400",
@@ -20,7 +20,7 @@ const VARIANT_CONFIG = {
 	},
 	hearts: {
 		label: "Hearts Left",
-		icon: assetsPath.userStats.heart,
+		icon: assetsPath.icons.heart,
 		styles: {
 			borderColor: "border-rose-500",
 			bgColor: "bg-rose-500",

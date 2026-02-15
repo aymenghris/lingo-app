@@ -11,7 +11,7 @@ export const PracticeModal = () => {
 		<ModalWrapper
 			isOpen={isOpen}
 			onOpenChange={closeModal}
-			imageSrc={assetsPath.userStats.heart}
+			imageSrc={assetsPath.icons.heart}
 			title="Practice lesson"
 			description="Practice lessons to regain hearts and Points, You won't loose hearts in practice."
 			primaryButton={{

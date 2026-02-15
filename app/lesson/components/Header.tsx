@@ -31,7 +31,7 @@ export const Header = () => {
 
 			<div className="flex items-center text-rose-600">
 				<Image
-					src={assetsPath.userStats.heart}
+					src={assetsPath.icons.heart}
 					width={28}
 					height={28}
 					alt="heart"

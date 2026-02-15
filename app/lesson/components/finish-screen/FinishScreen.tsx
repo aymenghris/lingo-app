@@ -42,7 +42,7 @@ export const FinishScreen = () => {
 	return (
 		<FinishScreenLayout footer={<Footer onCheck={handleFinish} />}>
 			<Image
-				src={assetsPath.public.confettiBall}
+				src={assetsPath.icons.confettiBall}
 				alt="finsih"
 				width={100}
 				height={100}
