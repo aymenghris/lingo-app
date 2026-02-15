@@ -14,3 +14,4 @@ export * from "../domains/enrollments/enrollments.queries"
 
 export * from "../domains/stats/stats.queries"
 export * from "../domains/users/users.queries"
+export * from "../domains/users-subscriptions/users-subscriptions.queries"
