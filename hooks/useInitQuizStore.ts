@@ -21,8 +21,6 @@ export const useInitQuizStores = ({
 		useUserStore.getState().initHearts(initialHearts)
 		useQuizInteractionStore.getState().initPercentage(initialPercentage)
 
-		initialized.current = true
-
 		useQuizSessionStore
 			.getState()
 			.initSession(initialLessonId, initialChallenges, initialQuizMode)
