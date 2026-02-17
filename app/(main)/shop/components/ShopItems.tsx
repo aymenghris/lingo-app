@@ -39,8 +39,6 @@ export const ShopItems: FC<ShopItemsProps> = ({
 	}
 
 	const onUpgrade = () => {
-		if (hasSubscription) return
-
 		startTransition(() => {
 			createStripeUrl()
 				.then((response) => {
@@ -58,7 +56,6 @@ export const ShopItems: FC<ShopItemsProps> = ({
 				<Button
 					onClick={onRefillHearts}
 					disabled={!canRefill || hasSubscription}
-					// variant={hasSubscription ? "default-outline" : "default"}
 				>
 					{isFullHealth ? (
 						"full"
@@ -72,12 +69,8 @@ export const ShopItems: FC<ShopItemsProps> = ({
 				label="Unlimted hearts"
 				imageSrc={assetsPath.icons.sparklingHeart}
 			>
-				<Button
-					onClick={onUpgrade}
-					disabled={isPending || hasSubscription}
-					// variant={hasSubscription ? "default-outline" : "default"}
-				>
-					{hasSubscription ? "active" : "upgrade"}
+				<Button onClick={onUpgrade} disabled={isPending}>
+					{hasSubscription ? "settings" : "upgrade"}
 				</Button>
 			</ItemsCard>
 		</div>
