@@ -1,18 +1,14 @@
-import { getUserActiveCourse, getUserStats } from "@database/queries"
 import { Unit } from "@learn/components/unit/Unit"
-import { redirect } from "next/navigation"
 import { StatsBar } from "@/components/StatsBar"
 import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
 import { getUnitsWithProgress } from "@/services/unit-service"
+import { getAuthenticatedUserData } from "@/utils/get-user-data"
 import { Header } from "./components/Header"
 
 const LearnPage = async () => {
-	const userActiveCourse = await getUserActiveCourse()
+	const { userActiveCourse, hearts, points, isSubscribed } =
+		await getAuthenticatedUserData()
 
-	if (!userActiveCourse) {
-		redirect("/courses")
-	}
-	const { hearts, points } = await getUserStats()
 	const unitsData = await getUnitsWithProgress(userActiveCourse.id)
 
 	return (
@@ -22,7 +18,7 @@ const LearnPage = async () => {
 					activeCourse={userActiveCourse}
 					hearts={hearts}
 					points={points}
-					hasSubscription={false}
+					hasSubscription={isSubscribed}
 				/>
 			</StickyWrapper>
 
