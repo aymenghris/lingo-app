@@ -7,4 +7,5 @@ export interface QuizType {
 	initialHearts: number
 	initialPercentage: number
 	initialQuizMode: QuizMode
+	isSubscribed: boolean
 }
