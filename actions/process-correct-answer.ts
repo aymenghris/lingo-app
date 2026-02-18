@@ -5,9 +5,9 @@ import {
 	incrementHeartsAndPoints,
 	incrementPoints,
 	insertCompletedChallenge,
+	isUserCompletedLesson,
 } from "@database/queries"
 import { revalidatePaths } from "@/actions/utils"
-import type { QuizMode } from "@/types/quiz-types"
 import { getUserId } from "@/utils/clerk"
 
 const PATHS_TO_REVALIDATE = [
@@ -18,14 +18,18 @@ const PATHS_TO_REVALIDATE = [
 ] as const
 
 export const processCorrectAnswer = async (
-	quizMode: QuizMode,
 	lessonId: number | undefined,
 	challengeId: number,
 ) => {
-	const userId = await getUserId()
-	const userStats = await getUserStats()
+	if (!lessonId) return
 
-	if (quizMode === "practice") {
+	const [userId, userStats, isPracticeMode] = await Promise.all([
+		getUserId(),
+		getUserStats(),
+		isUserCompletedLesson(lessonId),
+	])
+
+	if (isPracticeMode) {
 		await incrementHeartsAndPoints(
 			userId,
 			userStats.hearts,
