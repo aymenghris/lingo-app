@@ -11,7 +11,8 @@ interface UserStats {
 	incrementHearts: () => void
 
 	incrementPoints: (points: number) => void
-	toggleSubscription: () => void
+
+	setSubscription: (subscription: boolean) => void
 }
 
 const DEFAULT_HEARTS = 5
@@ -41,11 +42,7 @@ const useUserStore = create<UserStats>((set) => ({
 			return { points: state.points + points }
 		}),
 
-	toggleSubscription: () =>
-		set((state) => {
-			if (state.hasSubscription === undefined) return state
-			return { hasSubscription: !state.hasSubscription }
-		}),
+	setSubscription: (subscription) => set({ hasSubscription: subscription }),
 }))
 
 const useUserStoreSelector = () => {
@@ -60,7 +57,6 @@ const useUserStoreSelector = () => {
 			incrementHearts: state.incrementHearts,
 
 			incrementPoints: state.incrementPoints,
-			toggleSubscription: state.toggleSubscription,
 		})),
 	)
 }
