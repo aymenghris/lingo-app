@@ -1,24 +1,13 @@
 import { ShopItems } from "@shop/components/ShopItems"
 import Image from "next/image"
-import { redirect } from "next/navigation"
 import { StatsBar } from "@/components/StatsBar"
 import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
 import { assetsPath } from "@/constants"
-import { getUserActiveCourse } from "@/database/domains/enrollments/enrollments.queries"
-import { getUserStats } from "@/database/domains/stats/stats.queries"
-import { getUserSubscription } from "@/database/domains/users-subscriptions/users-subscriptions.queries"
+import { getAuthenticatedUserData } from "@/utils/get-user-data"
 
 const ShopPage = async () => {
-	const [userActiveCourse, userSubscription] = await Promise.all([
-		getUserActiveCourse(),
-		getUserSubscription(),
-	])
-
-	if (!userActiveCourse) {
-		redirect("/courses")
-	}
-	const { hearts, points } = await getUserStats()
-	const isSubscribed = !!userSubscription?.isActive
+	const { userActiveCourse, hearts, points, isSubscribed } =
+		await getAuthenticatedUserData()
 
 	return (
 		<div className="flex flex-row-reverse gap-12 px-6">
