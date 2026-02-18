@@ -1,10 +1,10 @@
 import Image from "next/image"
-import type { FC } from "react"
+import type { FC, ReactNode } from "react"
 import { assetsPath } from "@/constants"
 import { cn } from "@/lib/utils"
 
 interface ResultCardProps {
-	value: number | undefined
+	value: number | ReactNode | undefined
 	variant: "points" | "hearts"
 }
 

@@ -3,6 +3,7 @@
 import { FinishScreenLayout } from "@lesson/components/finish-screen/FinishScreenLayout"
 import { ResultCard } from "@lesson/components/finish-screen/ResultCard"
 import { Footer } from "@lesson/components/footer/Footer"
+import { InfinityIcon } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
@@ -15,15 +16,19 @@ import { useUserStoreSelector } from "@/stores/use-user-store"
 const XP_PER_CHALLENGE = 10
 
 export const FinishScreen = () => {
-	const { hearts } = useUserStoreSelector()
-	const { challenges, quizMode } = useQuizSessionStoreSelector()
+	const { hasSubscription, hearts } = useUserStoreSelector()
+	const { challenges, quizMode, resetQuizState } =
+		useQuizSessionStoreSelector()
 
 	const router = useRouter()
 	const [_, startTransition] = useSyncedTransition()
 
 	const handleFinish = () => {
+		resetQuizState()
+
 		if (quizMode === "practice") {
 			// No server action needed → navigate immediately
+			resetQuizState()
 			router.push("/learn")
 			return
 		}
@@ -31,6 +36,7 @@ export const FinishScreen = () => {
 		startTransition(() => {
 			processLessonCompletion()
 				.then(() => {
+					resetQuizState()
 					router.push("/learn")
 				})
 				.catch(() =>
@@ -59,7 +65,16 @@ export const FinishScreen = () => {
 					value={challenges.length * XP_PER_CHALLENGE}
 				/>
 
-				<ResultCard variant="hearts" value={hearts} />
+				<ResultCard
+					variant="hearts"
+					value={
+						hasSubscription ? (
+							<InfinityIcon className="size-5 shrink-0 stroke-3" />
+						) : (
+							hearts
+						)
+					}
+				/>
 			</div>
 		</FinishScreenLayout>
 	)
