@@ -19,6 +19,8 @@ interface QuizSessionStore {
 	) => void
 
 	nextChallenge: () => void
+
+	resetQuizState: () => void
 }
 
 const useQuizSessionStore = create<QuizSessionStore>()(
@@ -28,7 +30,7 @@ const useQuizSessionStore = create<QuizSessionStore>()(
 			challenges: [],
 			activeIndex: 0,
 			quizMode: "learn",
-			quizState: "in-progress",
+			quizState: "not-started",
 			isInitialized: false,
 
 			initSession: (lessonId, challenges, quizMode) => {
@@ -41,6 +43,7 @@ const useQuizSessionStore = create<QuizSessionStore>()(
 					activeIndex: uncompleted === -1 ? 0 : uncompleted,
 					quizMode,
 					isInitialized: true,
+					quizState: "in-progress",
 				})
 			},
 
@@ -54,6 +57,8 @@ const useQuizSessionStore = create<QuizSessionStore>()(
 					set({ quizState: "completed" })
 				}
 			},
+
+			resetQuizState: () => set({ quizState: "not-started" }),
 		}),
 		{ name: "quiz-session-store" },
 	),
@@ -72,6 +77,8 @@ const useQuizSessionStoreSelector = () => {
 
 			initSession: state.initSession,
 			nextChallenge: state.nextChallenge,
+
+			resetQuizState: state.resetQuizState,
 		})),
 	)
 }

@@ -1,3 +1,3 @@
 export type QuizMode = "learn" | "practice"
 
-export type QuizState = "completed" | "in-progress"
+export type QuizState = "not-started" | "in-progress" | "completed"
