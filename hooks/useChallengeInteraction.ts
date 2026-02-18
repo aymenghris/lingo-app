@@ -16,7 +16,8 @@ export const useChallengeInteraction = () => {
 	const { selectedOptionId, incrementPercentage, setChallengeStatus } =
 		useQuizInteractionStoreSelector()
 
-	const { incrementHearts, decrementHearts } = useUserStoreSelector()
+	const { hasSubscription, incrementHearts, decrementHearts } =
+		useUserStoreSelector()
 
 	const checkAnswer = () => {
 		const correctOption = currentChallenge.options.find(
@@ -36,7 +37,7 @@ export const useChallengeInteraction = () => {
 		incrementPercentage(100 / challenges.length)
 
 		startTransition(() => {
-			processCorrectAnswer(quizMode, lessonId, currentChallenge.id)
+			processCorrectAnswer(lessonId, currentChallenge.id)
 				.then(() => {
 					if (quizMode === "practice") incrementHearts()
 				})
@@ -50,7 +51,7 @@ export const useChallengeInteraction = () => {
 		sfx.incorrect.play()
 		setChallengeStatus("wrong")
 
-		if (quizMode === "practice") {
+		if (hasSubscription || quizMode === "practice") {
 			return
 		}
 
