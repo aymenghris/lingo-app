@@ -12,6 +12,7 @@ export const useInitQuizStores = ({
 	initialHearts,
 	initialPercentage,
 	initialQuizMode,
+	isSubscribed,
 }: InitQuizStore) => {
 	const initialized = useRef(false)
 
@@ -19,6 +20,7 @@ export const useInitQuizStores = ({
 	if (!initialized.current) {
 		// .getState() = direct access, no React involvement
 		useUserStore.getState().initHearts(initialHearts)
+		useUserStore.getState().setSubscription(isSubscribed)
 		useQuizInteractionStore.getState().initPercentage(initialPercentage)
 
 		useQuizSessionStore
