@@ -23,6 +23,7 @@ interface LessonsProps {
 }
 
 export const Lesson: FC<LessonsProps> = ({
+	id,
 	placement,
 	state,
 	challenges,
@@ -60,8 +61,7 @@ export const Lesson: FC<LessonsProps> = ({
 		)
 	}
 
-	const lessonHref =
-		state === "completed" ? `/lesson/${placement}` : "/lesson"
+	const lessonHref = state === "completed" ? `/lesson/${id}` : "/lesson"
 
 	return (
 		<Link
