@@ -1,11 +1,11 @@
 "use server"
 
-import { PATHS_TO_REVALIDATE, revalidatePaths } from "@/actions/utils"
-import { isUserCompletedLesson } from "@/database/domains/completed-content/completed-lessons/completed-lessons.queries"
 import {
 	decrementHearts,
 	getUserStats,
-} from "@/database/domains/stats/stats.queries"
+	isUserCompletedLesson,
+} from "@database/queries"
+import { PATHS_TO_REVALIDATE, revalidatePaths } from "@/actions/utils"
 import { getUserId } from "@/utils/clerk"
 import { getUserSubscriptionData } from "@/utils/get-user-data"
 
