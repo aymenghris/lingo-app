@@ -12,6 +12,6 @@ export * from "../domains/content/challenges/challenges.queries"
 
 export * from "../domains/enrollments/enrollments.queries"
 
-export * from "../domains/stats/stats.queries"
+export * from "../domains/stats/users-stats.queries"
 export * from "../domains/users/users.queries"
 export * from "../domains/users-subscriptions/users-subscriptions.queries"

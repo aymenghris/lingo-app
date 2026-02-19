@@ -11,6 +11,6 @@ export * from "../domains/content/lessons/lessons.schema"
 export * from "../domains/content/units/units.schema"
 
 export * from "../domains/enrollments/enrollments.schema"
-export * from "../domains/stats/stats.schema"
+export * from "../domains/stats/users-stats.schema"
 export * from "../domains/users/users.schema"
 export * from "../domains/users-subscriptions/users-subscriptions.schema"

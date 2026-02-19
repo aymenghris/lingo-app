@@ -1,5 +1,5 @@
-import { usersStats } from "@database/schemas"
-import { eq } from "drizzle-orm"
+import { users, usersStats } from "@database/schemas"
+import { desc, eq } from "drizzle-orm"
 import { cache } from "react"
 import { DEFAULT_HEARTS, POINTS_TO_REFILL } from "@/constants"
 import { db } from "@/database/drizzle"
@@ -19,6 +19,20 @@ export const getUserStats = cache(async () => {
 		.limit(1)
 
 	return data
+})
+
+export const getTopTenUsers = cache(async () => {
+	return db
+		.select({
+			userId: usersStats.userId,
+			fullName: users.fullName,
+			avatar: users.avatar,
+			points: usersStats.points,
+		})
+		.from(usersStats)
+		.innerJoin(users, eq(users.id, usersStats.userId))
+		.orderBy(desc(usersStats.points))
+		.limit(10)
 })
 
 export const decrementHearts = async (userId: string, prevHearts: number) => {
