@@ -1,23 +1,23 @@
-import type { courses } from "@database/schemas"
 import { InfinityIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import type { FC } from "react"
 import { Button } from "@/components/ui/button"
 import { assetsPath } from "@/constants"
+import type { Course } from "@/types/course.types"
 
 interface StatsBarProps {
-	activeCourse: typeof courses.$inferSelect
+	activeCourse: Course
 	hearts: number
 	points: number
-	hasSubscription: boolean
+	isSubscribed: boolean
 }
 
 export const StatsBar: FC<StatsBarProps> = ({
 	activeCourse,
 	points,
 	hearts,
-	hasSubscription,
+	isSubscribed,
 }) => {
 	return (
 		<div className="flex items-center justify-between gap-x-2">
@@ -58,7 +58,7 @@ export const StatsBar: FC<StatsBarProps> = ({
 						height={22}
 						className="mr-2"
 					/>
-					{hasSubscription ? (
+					{isSubscribed ? (
 						<InfinityIcon className="size-4 stroke-3" />
 					) : (
 						hearts
