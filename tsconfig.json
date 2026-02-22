@@ -23,6 +23,7 @@
 			"@home/*": ["./app/(home)/*"],
 			"@learn/*": ["./app/(main)/learn/*"],
 			"@shop/*": ["./app/(main)/shop/*"],
+			"@quests/*": ["./app/(main)/quests/*"],
 			"@lesson/*": ["./app/lesson/*"],
 			"@courses/*": ["./app/(main)/courses/*"],
 			"@database/*": ["./database/_exports/*"],
