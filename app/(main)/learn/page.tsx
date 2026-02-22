@@ -1,6 +1,6 @@
 import { Unit } from "@learn/components/unit/Unit"
-import { StatsBar } from "@/components/StatsBar"
-import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
+import { UserProgress } from "@/components/UserProgress"
+import { FeedWrapper } from "@/components/wrappers"
 import { getUnitsWithProgress } from "@/services/unit-service"
 import { getAuthenticatedUserData } from "@/utils/get-user-data"
 import { Header } from "./components/Header"
@@ -13,14 +13,12 @@ const LearnPage = async () => {
 
 	return (
 		<div className="flex flex-row-reverse gap-12 px-6">
-			<StickyWrapper>
-				<StatsBar
-					activeCourse={userActiveCourse}
-					hearts={hearts}
-					points={points}
-					hasSubscription={isSubscribed}
-				/>
-			</StickyWrapper>
+			<UserProgress
+				activeCourse={userActiveCourse}
+				hearts={hearts}
+				points={points}
+				isSubscribed={isSubscribed}
+			/>
 
 			<FeedWrapper>
 				<Header title={userActiveCourse.title} />

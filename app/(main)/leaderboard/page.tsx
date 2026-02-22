@@ -1,9 +1,9 @@
 import { getTopTenUsers } from "@database/queries"
 import Image from "next/image"
-import { StatsBar } from "@/components/StatsBar"
+import { UserProgress } from "@/components/UserProgress"
 import { Avatar, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
-import { FeedWrapper, StickyWrapper } from "@/components/wrappers"
+import { FeedWrapper } from "@/components/wrappers"
 import { assetsPath } from "@/constants"
 import { getAuthenticatedUserData } from "@/utils/get-user-data"
 
@@ -13,14 +13,12 @@ const LeaderboardPage = async () => {
 
 	return (
 		<div className="flex flex-row-reverse gap-12 px-6">
-			<StickyWrapper>
-				<StatsBar
-					activeCourse={userActiveCourse}
-					hearts={hearts}
-					points={points}
-					hasSubscription={isSubscribed}
-				/>
-			</StickyWrapper>
+			<UserProgress
+				activeCourse={userActiveCourse}
+				hearts={hearts}
+				points={points}
+				isSubscribed={isSubscribed}
+			/>
 
 			<FeedWrapper>
 				<div className="flex w-full flex-col items-center">
