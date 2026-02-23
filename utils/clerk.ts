@@ -20,3 +20,9 @@ export const getFullUser = async () => {
 
 	return { userId, user }
 }
+
+export const getIsAdmin = async () => {
+	const { sessionClaims } = await auth()
+
+	return sessionClaims?.metadata?.role === "admin"
+}
