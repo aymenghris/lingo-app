@@ -1,13 +1,15 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 import { NextResponse } from "next/server"
-import { getIsAdmin } from "@/utils/clerk"
 
 const isPublicRoute = createRouteMatcher(["/", "/api/webhooks/(.*)"])
 const isAdminRoute = createRouteMatcher(["/admin(.*)"])
 
 export default clerkMiddleware(async (auth, req) => {
 	if (isAdminRoute(req)) {
-		const isAdmin = await getIsAdmin()
+		// Use the `auth` parameter provided by clerkMiddleware directly.
+		// Calling auth() from @clerk/nextjs/server standalone doesn't work in middleware context.
+		const { sessionClaims } = await auth()
+		const isAdmin = sessionClaims?.metadata?.role === "admin"
 
 		if (!isAdmin) {
 			const url = new URL("/", req.url)
