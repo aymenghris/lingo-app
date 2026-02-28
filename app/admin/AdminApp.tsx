@@ -1,4 +1,4 @@
-import { CourseCreate, CourseList } from "@admin/course"
+import { CourseCreate, CourseEdit, CourseList } from "@admin/course"
 import simpleRestProvider from "ra-data-simple-rest"
 import { Admin, Resource } from "react-admin"
 
@@ -10,6 +10,7 @@ const AdminApp = () => (
 			name="courses"
 			list={CourseList}
 			create={CourseCreate}
+			edit={CourseEdit}
 			recordRepresentation="title"
 		/>
 	</Admin>

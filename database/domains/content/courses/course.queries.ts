@@ -22,3 +22,16 @@ export const getCourseById = cache(async (courseId: number) => {
 
 	return course
 })
+
+export const updateCourse = async (
+	courseId: number,
+	updatedCourse: Partial<CourseInsert>,
+) => {
+	const [course] = await db.update(courses).set(updatedCourse).where(eq(courses.id, courseId)).returning()
+	return course
+}
+
+export const deleteCourse = async (courseId: number) => {
+	const [course] = await db.delete(courses).where(eq(courses.id, courseId)).returning()
+	return course
+}
