@@ -4,9 +4,9 @@ import { cache } from "react"
 import { db } from "@/database/drizzle"
 import type { CourseInsert } from "@/types/course.types"
 
-export const createCourse = async (newCourse: CourseInsert) => {
-	const [course] = await db.insert(courses).values(newCourse).returning()
-	return course
+export const createCourse = async (course: CourseInsert) => {
+	const [createdCourse] = await db.insert(courses).values(course).returning()
+	return createdCourse
 }
 
 export const getCourses = cache(async () => {
