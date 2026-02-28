@@ -30,6 +30,13 @@ const AdminApp = () => (
 			edit={LessonEdit}
 			recordRepresentation="title"
 		/>
+		<Resource
+			name="challenges"
+			list={ChallengeList}
+			create={ChallengeCreate}
+			edit={ChallengeEdit}
+			recordRepresentation="question"
+		/>
 	</Admin>
 )
 

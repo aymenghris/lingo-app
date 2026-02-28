@@ -4,3 +4,5 @@ export * from "../domains/content/units/units.validators"
 
 export * from "../domains/content/lessons/lessons.validators"
 
+export * from "../domains/content/challenges/challenges.validators"
+

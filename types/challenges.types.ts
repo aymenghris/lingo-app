@@ -2,6 +2,7 @@ import type { challenges } from "@database/schemas"
 import type { ChallengeOption } from "@/types/challenge-options.types"
 
 export type Challenge = typeof challenges.$inferSelect
+export type ChallengeInsert = typeof challenges.$inferInsert
 
 export type ChallengeWithCompletedState = Challenge & {
 	completed: boolean
