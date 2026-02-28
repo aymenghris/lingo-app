@@ -6,35 +6,35 @@ type RouteParams<T> = { params: Promise<T> }
 
 export const GET = async (
 	_request: NextRequest,
-	{ params }: RouteParams<{ lessonId: number }>,
+	{ params }: RouteParams<{ lessonId: string }>,
 ) => {
 	const { lessonId } = await params
-	const lesson = await getLessonById(lessonId)
+	const lesson = await getLessonById(Number(lessonId))
 
 	return NextResponse.json(lesson)
 }
 
 export const PUT = async (
 	request: NextRequest,
-	{ params }: RouteParams<{ lessonId: number }>,
+	{ params }: RouteParams<{ lessonId: string }>,
 ) => {
 	const { lessonId } = await params
 
 	const body = await request.json()
 	const validatedBody = updateLessonSchema.parse(body)
 
-	const lesson = await updateLesson(lessonId, validatedBody)
+	const lesson = await updateLesson(Number(lessonId), validatedBody)
 
 	return NextResponse.json(lesson)
 }
 
 export const DELETE = async (
 	_request: NextRequest,
-	{ params }: RouteParams<{ lessonId: number }>,
+	{ params }: RouteParams<{ lessonId: string }>,
 ) => {
 	const { lessonId } = await params
 
-	const lesson = await deleteLesson(lessonId)
+	const lesson = await deleteLesson(Number(lessonId))
 
 	return NextResponse.json(lesson)
 }

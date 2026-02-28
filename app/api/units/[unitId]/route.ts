@@ -6,35 +6,35 @@ type RouteParams<T> = { params: Promise<T> }
 
 export const GET = async (
 	_request: NextRequest,
-	{ params }: RouteParams<{ unitId: number }>,
+	{ params }: RouteParams<{ unitId: string }>,
 ) => {
 	const { unitId } = await params
-	const unit = await getUnitById(unitId)
+	const unit = await getUnitById(Number(unitId))
 
 	return NextResponse.json(unit)
 }
 
 export const PUT = async (
 	request: NextRequest,
-	{ params }: RouteParams<{ unitId: number }>,
+	{ params }: RouteParams<{ unitId: string }>,
 ) => {
 	const { unitId } = await params
 
 	const body = await request.json()
 	const validatedBody = updateUnitSchema.parse(body)
 
-	const unit = await updateUnit(unitId, validatedBody)
+	const unit = await updateUnit(Number(unitId), validatedBody)
 
 	return NextResponse.json(unit)
 }
 
 export const DELETE = async (
 	_request: NextRequest,
-	{ params }: RouteParams<{ unitId: number }>,
+	{ params }: RouteParams<{ unitId: string }>,
 ) => {
 	const { unitId } = await params
 
-	const unit = await deleteUnit(unitId)
+	const unit = await deleteUnit(Number(unitId))
 
 	return NextResponse.json(unit)
 }

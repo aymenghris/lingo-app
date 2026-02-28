@@ -10,35 +10,35 @@ type RouteParams<T> = { params: Promise<T> }
 
 export const GET = async (
 	_request: NextRequest,
-	{ params }: RouteParams<{ challengeId: number }>,
+	{ params }: RouteParams<{ challengeId: string }>,
 ) => {
 	const { challengeId } = await params
-	const challenge = await getChallenge(challengeId)
+	const challenge = await getChallenge(Number(challengeId))
 
 	return NextResponse.json(challenge)
 }
 
 export const PUT = async (
 	request: NextRequest,
-	{ params }: RouteParams<{ challengeId: number }>,
+	{ params }: RouteParams<{ challengeId: string }>,
 ) => {
 	const { challengeId } = await params
 
 	const body = await request.json()
 	const validatedBody = updateChallengeSchema.parse(body)
 
-	const challenge = await updateChallenge(challengeId, validatedBody)
+	const challenge = await updateChallenge(Number(challengeId), validatedBody)
 
 	return NextResponse.json(challenge)
 }
 
 export const DELETE = async (
 	_request: NextRequest,
-	{ params }: RouteParams<{ challengeId: number }>,
+	{ params }: RouteParams<{ challengeId: string }>,
 ) => {
 	const { challengeId } = await params
 
-	const challenge = await deleteChallenge(challengeId)
+	const challenge = await deleteChallenge(Number(challengeId))
 
 	return NextResponse.json(challenge)
 }
