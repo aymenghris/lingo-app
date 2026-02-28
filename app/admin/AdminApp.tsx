@@ -2,6 +2,11 @@ import { CourseCreate, CourseEdit, CourseList } from "@admin/course"
 import { UnitCreate, UnitEdit, UnitList } from "@admin/unit"
 import { LessonCreate, LessonEdit, LessonList } from "@admin/lesson"
 import { ChallengeCreate, ChallengeEdit, ChallengeList } from "@admin/challenge"
+import {
+	ChallengeOptionCreate,
+	ChallengeOptionEdit,
+	ChallengeOptionList,
+} from "@admin/challengeOption"
 import simpleRestProvider from "ra-data-simple-rest"
 import { Admin, Resource } from "react-admin"
 
@@ -36,6 +41,13 @@ const AdminApp = () => (
 			create={ChallengeCreate}
 			edit={ChallengeEdit}
 			recordRepresentation="question"
+		/>
+		<Resource
+			name="challengeOptions"
+			list={ChallengeOptionList}
+			create={ChallengeOptionCreate}
+			edit={ChallengeOptionEdit}
+			recordRepresentation="textContent"
 		/>
 	</Admin>
 )

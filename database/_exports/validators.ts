@@ -6,3 +6,4 @@ export * from "../domains/content/lessons/lessons.validators"
 
 export * from "../domains/content/challenges/challenges.validators"
 
+export * from "../domains/content/challenge-options/challenge-options.validators"

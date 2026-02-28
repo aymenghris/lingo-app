@@ -10,6 +10,8 @@ export * from "../domains/content/lessons/lessons.queries"
 
 export * from "../domains/content/challenges/challenges.queries"
 
+export * from "../domains/content/challenge-options/challenge-options.queries"
+
 export * from "../domains/enrollments/enrollments.queries"
 
 export * from "../domains/stats/users-stats.queries"
