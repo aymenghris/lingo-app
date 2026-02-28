@@ -1,7 +1,7 @@
+import { getLessonById } from "@database/queries"
 import { completedLessons, lessons } from "@database/schemas"
 import { and, asc, eq, gt } from "drizzle-orm"
 import { cache } from "react"
-import { getLesson } from "@/database/domains/content/lessons/lessons.queries"
 import { db } from "@/database/drizzle"
 import { getUserId } from "@/utils/clerk"
 
@@ -42,7 +42,7 @@ export const insertCompletedLesson = async (
 }
 
 export const getNextLesson = async (lessonId: number) => {
-	const currentLesson = await getLesson(lessonId)
+	const currentLesson = await getLessonById(lessonId)
 
 	// Fnd the next lesson in the same unit with higher placement
 	const [nextLesson] = await db
