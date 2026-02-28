@@ -48,6 +48,7 @@ const AdminApp = () => (
 			create={ChallengeOptionCreate}
 			edit={ChallengeOptionEdit}
 			recordRepresentation="textContent"
+			options={{ label: "Challenge Options" }}
 		/>
 	</Admin>
 )
