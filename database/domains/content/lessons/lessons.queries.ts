@@ -1,6 +1,13 @@
 import { challengeOptions, challenges, lessons } from "@database/schemas"
 import { and, asc, eq } from "drizzle-orm"
+import { cache } from "react"
 import { db } from "@/database/drizzle"
+import type { LessonInsert } from "@/types/lessons.types"
+
+export const createLesson = async (lesson: LessonInsert) => {
+	const [createdLesson] = await db.insert(lessons).values(lesson).returning()
+	return createdLesson
+}
 
 export const getLessons = async (unitId: number) => {
 	return db
@@ -10,7 +17,11 @@ export const getLessons = async (unitId: number) => {
 		.orderBy(lessons.placement)
 }
 
-export const getLesson = async (lessonId: number) => {
+export const getAllLessons = cache(async () => {
+	return db.select().from(lessons).orderBy(lessons.placement)
+})
+
+export const getLessonById = cache(async (lessonId: number) => {
 	const [lesson] = await db
 		.select()
 		.from(lessons)
@@ -18,7 +29,7 @@ export const getLesson = async (lessonId: number) => {
 		.limit(1)
 
 	return lesson
-}
+})
 
 export const getLessonContent = async (lessonId: number) => {
 	const lessonContent = await db.query.lessons.findFirst({
@@ -54,4 +65,26 @@ export const getFirstLesson = async (unitId: number) => {
 	}
 
 	return firstLesson
+}
+
+export const updateLesson = async (
+	lessonId: number,
+	updatedLesson: Partial<LessonInsert>,
+) => {
+	const [lesson] = await db
+		.update(lessons)
+		.set(updatedLesson)
+		.where(eq(lessons.id, lessonId))
+		.returning()
+
+	return lesson
+}
+
+export const deleteLesson = async (lessonId: number) => {
+	const [lesson] = await db
+		.delete(lessons)
+		.where(eq(lessons.id, lessonId))
+		.returning()
+
+	return lesson
 }
