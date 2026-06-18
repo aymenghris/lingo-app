@@ -1,16 +1,17 @@
 "use client"
 
-import type { courses, enrollments } from "@database/schemas"
 import { useRouter } from "next/navigation"
 import { type FC, useTransition } from "react"
 import { toast } from "sonner"
 import { upsertUserEnrollment } from "@/actions/user-enrollment"
 import { CourseCard } from "@/app/(main)/courses/CourseCard"
 import { cn } from "@/lib/utils"
+import type { Course } from "@/types/course.types"
+import type { ActiveCourseId } from "@/types/enrollments.types"
 
 interface CoursesListProps {
-	courses: (typeof courses.$inferSelect)[]
-	activeCourseId: (typeof enrollments.$inferSelect)["courseId"] | null
+	courses: Course[]
+	activeCourseId: ActiveCourseId | null
 }
 export const CoursesList: FC<CoursesListProps> = ({
 	courses,
@@ -19,8 +20,12 @@ export const CoursesList: FC<CoursesListProps> = ({
 	const router = useRouter()
 	const [pending, startTransition] = useTransition()
 
-	const handleCourseClick = (courseId: number) => {
+	const handleCourseClick = (courseId: number, availability: boolean) => {
 		if (pending) return
+
+		if (!availability) {
+			return toast.warning("Course is not available")
+		}
 
 		if (courseId === activeCourseId) {
 			return router.push("/learn")
@@ -48,8 +53,7 @@ export const CoursesList: FC<CoursesListProps> = ({
 			{courses.map((course) => (
 				<CourseCard
 					key={course.title}
-					title={course.title}
-					id={course.id}
+					{...course}
 					imageSrc={`/flags/${course.code}.svg`}
 					onClick={handleCourseClick}
 					disabled={pending}

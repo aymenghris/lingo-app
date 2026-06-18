@@ -2,18 +2,20 @@ import { CheckIcon } from "lucide-react"
 import Image from "next/image"
 import type { FC } from "react"
 import { cn } from "@/lib/utils"
+import type { Course } from "@/types/course.types"
 
-type CourseCardProps = {
-	title: string
-	id: number
+interface CourseCardProps
+	extends Pick<Course, "title" | "id" | "availability"> {
 	imageSrc: string
-	onClick: (id: number) => void
+	onClick: (id: number, availability: boolean) => void
 	disabled?: boolean
 	active?: boolean
 }
+
 export const CourseCard: FC<CourseCardProps> = ({
 	title,
 	id,
+	availability,
 	imageSrc,
 	onClick,
 	disabled,
@@ -21,7 +23,7 @@ export const CourseCard: FC<CourseCardProps> = ({
 }) => (
 	<button
 		type="button"
-		onClick={() => onClick(id)}
+		onClick={() => onClick(id, availability)}
 		className={cn(
 			"flex flex-col items-center justify-between",
 			"relative h-full min-h-54.25 min-w-50 p-3 pb-6",
