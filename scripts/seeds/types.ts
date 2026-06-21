@@ -24,13 +24,28 @@ export type LanguageMap = {
 
 export type LanguageCode = keyof LanguageMap
 
-export type Character = "man" | "woman" | "robot"
-
-export type Objects = "apple" | "banana" | "cherry"
+export type Animal = "bird" | "cat" | "dog"
+export type Character = "boy" | "girl" | "man" | "robot" | "woman" | "zombie"
+export type Clothing = "hat" | "shirt" | "shoes"
+export type Color = "blue" | "green" | "red" | "yellow"
+export type Food = "bread" | "milk" | "water"
+export type Fruit = "apple" | "banana" | "cherry"
+export type Furniture = "door" | "house" | "table" | "chair"
+export type Greeting = "hello" | "goodbye" | "please" | "thank you"
+export type Numbers = "one" | "two" | "three" | "four" | "five"
+export type Verbs = "eat" | "run" | "sleep" | "drink"
 
 export interface AssetMap {
+	animals: Animal
 	characters: Character
-	objects: Objects
+	clothing: Clothing
+	colors: Color
+	fruits: Fruit
+	food: Food
+	greetings: Greeting
+	furniture: Furniture
+	numbers: Numbers
+	verbs: Verbs
 }
 
 export type Category = keyof AssetMap

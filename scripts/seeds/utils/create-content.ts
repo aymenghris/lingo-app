@@ -35,7 +35,9 @@ export const createOption = (
 		imageSrc: includeMedia
 			? getItemImagePath(def.category, def.assetKey)
 			: null,
-		audioSrc: includeMedia ? getAudioPath(language, def.assetKey) : null,
+		audioSrc: includeMedia
+			? getAudioPath(language, def.category, def.assetKey)
+			: null,
 	}
 }
 
