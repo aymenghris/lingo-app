@@ -27,6 +27,7 @@ export const useChallengeCard = ({
 
 	const handleClick = useCallback(() => {
 		if (disabled) return
+		controls.volume(0.3)
 		controls.play()
 		onOptionClick()
 	}, [disabled, onOptionClick, controls])

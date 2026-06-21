@@ -15,6 +15,7 @@ const playSound = (path: string): void => {
 	}
 
 	const audio = audioInstances[path]
+	audio.volume = 0.5
 
 	// Play and handle potential browser autoplay restrictions
 	audio.play().catch((error: unknown) => {

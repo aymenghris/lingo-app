@@ -1,5 +1,5 @@
 import { ConfettiExplosion } from "@lesson/components/finish-screen/ConfettiExplosion"
-import type { FC, ReactNode } from "react"
+import { type FC, type ReactNode, useEffect } from "react"
 import { useAudio } from "react-use"
 import { cn } from "@/lib/utils"
 
@@ -12,10 +12,14 @@ export const FinishScreenLayout: FC<FinishScreenLayoutProps> = ({
 	children,
 	footer,
 }) => {
-	const [finishAudioElement] = useAudio({
+	const [finishAudioElement, _state, controls] = useAudio({
 		src: "/sounds/finish.mp3",
 		autoPlay: true,
 	})
+
+	useEffect(() => {
+		controls.volume(0.3)
+	}, [controls])
 
 	return (
 		<div className="flex h-screen flex-col">
