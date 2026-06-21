@@ -18,7 +18,9 @@ export const processLessonCompletion = async () => {
 
 	const nextLesson = await getNextLesson(currentLessonId)
 
-	await updateCurrentLessonId(userId, courseId, nextLesson.id)
+	if (nextLesson) {
+		await updateCurrentLessonId(userId, courseId, nextLesson.id)
+	}
 
 	revalidatePath("/learn")
 }
