@@ -11,7 +11,6 @@ interface Params {
 const LessonIdPage = async ({ params }: Params) => {
 	const { lessonId } = await params
 
-	// const isLessonCompleted = await isUserCompletedLesson(lessonId)
 	const [isLessonCompleted, { isSubscribed }] = await Promise.all([
 		isUserCompletedLesson(lessonId),
 		getUserSubscriptionData(),
