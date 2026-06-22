@@ -20,6 +20,8 @@ interface QuizSessionStore {
 
 	nextChallenge: () => void
 
+	resetQuizMode: () => void
+
 	resetQuizState: () => void
 }
 
@@ -58,6 +60,8 @@ const useQuizSessionStore = create<QuizSessionStore>()(
 				}
 			},
 
+			resetQuizMode: () => set({ quizMode: "learn" }),
+
 			resetQuizState: () => set({ quizState: "not-started" }),
 		}),
 		{ name: "quiz-session-store" },
@@ -78,6 +82,7 @@ const useQuizSessionStoreSelector = () => {
 			initSession: state.initSession,
 			nextChallenge: state.nextChallenge,
 
+			resetQuizMode: state.resetQuizMode,
 			resetQuizState: state.resetQuizState,
 		})),
 	)

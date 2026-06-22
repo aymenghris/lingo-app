@@ -17,18 +17,17 @@ const XP_PER_CHALLENGE = 10
 
 export const FinishScreen = () => {
 	const { hasSubscription, hearts } = useUserStoreSelector()
-	const { challenges, quizMode, resetQuizState } =
+	const { challenges, quizMode, resetQuizState, resetQuizMode } =
 		useQuizSessionStoreSelector()
 
 	const router = useRouter()
 	const [_, startTransition] = useSyncedTransition()
 
 	const handleFinish = () => {
-		resetQuizState()
-
 		if (quizMode === "practice") {
 			// No server action needed → navigate immediately
 			resetQuizState()
+			resetQuizMode()
 			router.push("/learn")
 			return
 		}
