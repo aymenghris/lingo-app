@@ -4,7 +4,7 @@ export const getAudioPath = <T extends Category>(
 	languageCode: LanguageCode,
 	category: T,
 	item: AssetMap[T],
-) => `/audios/${languageCode}/${category}/${item}.mp3`
+) => `/audios/${languageCode}/${category}/${item.replace(" ", "-")}.mp3`
 
 export const getItemImagePath = <T extends Category>(
 	category: T,
