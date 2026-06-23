@@ -14,7 +14,17 @@ export const QuestionBubble: FC<{ question: string }> = ({ question }) => {
 				className="size-10 lg:size-15"
 			/>
 			<div className="relative rounded-xl border-2 px-4 py-2 max-lg:text-sm">
-				{question}
+				{/**
+				 * Extracts the target phrase from the full question.
+				 *
+				 * Database format: "select the correct meaning: 'el hombre'"
+				 * UI display format: "'el hombre'"
+				 *
+				 * Note: The full string is intentionally stored in the database
+				 * to differentiate between 'assist' and 'select' challenge types.
+				 */}
+
+				{question.split("'")[1]}
 
 				<div
 					className={cn(
