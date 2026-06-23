@@ -8,7 +8,7 @@ export const usersStats = pgTable("users_stats", {
 		.notNull()
 		.references(() => users.id, { onDelete: "cascade" }),
 	hearts: integer("hearts").notNull().default(5),
-	points: integer("points").notNull().default(500),
+	points: integer("points").notNull().default(0),
 })
 
 export const statsRelation = relations(usersStats, ({ one }) => ({
