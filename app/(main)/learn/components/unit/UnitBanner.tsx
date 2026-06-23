@@ -17,7 +17,7 @@ export const UnitBanner: FC<UnitBannerProps> = ({ title, description }) => (
 			"rounded-xl bg-green-500",
 		)}
 	>
-		<div className="space-y-2.5">
+		<div className="space-y-2.5 [&>*]:first-letter:uppercase">
 			<h3 className="font-bold text-2xl">{title}</h3>
 			<p className="text-lg">{description}</p>
 		</div>
