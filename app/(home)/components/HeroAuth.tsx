@@ -23,7 +23,7 @@ export const HeroAuth = () => (
 			</SignedIn>
 
 			<SignedOut>
-				<SignUpButton>
+				<SignUpButton mode="modal">
 					<Button size="lg" variant="secondary" className="w-full">
 						get started
 					</Button>
